@@ -10,6 +10,19 @@ public class Matriculas {
     private int dia_vencimento;
     private Date data_encerramento;
 
+
+    public Matriculas() {
+        
+    }
+    
+    public Matriculas(int codigo_matricula, int codigo_aluno, Date data_matricula, int dia_vencimento, Date data_encerramento) {
+        this.codigo_matricula = codigo_matricula;
+        this.codigo_aluno = codigo_aluno;
+        this.data_matricula = data_matricula;
+        this.dia_vencimento = dia_vencimento;
+        this.data_encerramento = data_encerramento;
+    }
+
     public int getCodigo_matricula() {
         return codigo_matricula;
     }

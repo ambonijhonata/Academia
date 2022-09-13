@@ -13,11 +13,11 @@ public class Teste {
 		
 		Connection connection = ConnectionFactory.getConnection
 								(
-									"containers-us-west-55.railway.app", 
-									"7412", 
+									"localhost", 
+									"5432", 
 									"sensei_academia", 
 									"postgres", 
-									"68aQuRLOMf5oT5yA7RGP"
+									"123"
 								);
 		if (connection != null) {
 			System.out.println("CONECTADO");

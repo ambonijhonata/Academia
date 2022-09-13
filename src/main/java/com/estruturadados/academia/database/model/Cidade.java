@@ -5,6 +5,16 @@ public class Cidade {
     private String estado;
     private String pais;
 
+    public Cidade(){
+        
+    }
+
+    public Cidade(String cidade, String estado, String pais) {
+        this.cidade = cidade;
+        this.estado = estado;
+        this.pais = pais;
+    }
+
     public String getCidade() {
         return cidade;
     }

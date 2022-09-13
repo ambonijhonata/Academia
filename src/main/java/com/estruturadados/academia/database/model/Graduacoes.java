@@ -4,6 +4,15 @@ public class Graduacoes {
     private String modalidade;
     private String graduacao;
 
+    public Graduacoes() {
+        
+    }
+
+    public Graduacoes(String modalidade, String graduacao) {
+        this.modalidade = modalidade;
+        this.graduacao = graduacao;
+    }
+
     public String getModalidade() {
         return modalidade;
     }
