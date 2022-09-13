@@ -80,18 +80,17 @@ public class MainView extends javax.swing.JFrame {
         });
 
         jDesktopPanelTelaPrincipal.setBackground(new java.awt.Color(204, 204, 204));
-        jDesktopPanelTelaPrincipal.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
         jDesktopPanelTelaPrincipal.setForeground(new java.awt.Color(204, 204, 204));
 
         javax.swing.GroupLayout jDesktopPanelTelaPrincipalLayout = new javax.swing.GroupLayout(jDesktopPanelTelaPrincipal);
         jDesktopPanelTelaPrincipal.setLayout(jDesktopPanelTelaPrincipalLayout);
         jDesktopPanelTelaPrincipalLayout.setHorizontalGroup(
             jDesktopPanelTelaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 902, Short.MAX_VALUE)
+            .addGap(0, 906, Short.MAX_VALUE)
         );
         jDesktopPanelTelaPrincipalLayout.setVerticalGroup(
             jDesktopPanelTelaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 473, Short.MAX_VALUE)
+            .addGap(0, 477, Short.MAX_VALUE)
         );
 
         jMenuSistema.setText("Sistema");
@@ -120,6 +119,11 @@ public class MainView extends javax.swing.JFrame {
         jMenuCadastro.add(jMenuItemAluno);
 
         jMenuItemCidades.setText("Cidades");
+        jMenuItemCidades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCidadesActionPerformed(evt);
+            }
+        });
         jMenuCadastro.add(jMenuItemCidades);
 
         jMenuItemModalidade.setText("Modalidade");
@@ -185,6 +189,15 @@ public class MainView extends javax.swing.JFrame {
             System.exit(0);
         }
     }//GEN-LAST:event_jMenuItemSairActionPerformed
+
+    private void jMenuItemCidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCidadesActionPerformed
+
+        ListaCidadesView listaCidadesView = new ListaCidadesView();
+        
+        this.jDesktopPanelTelaPrincipal.add(listaCidadesView);
+        
+        listaCidadesView.setVisible(true);
+    }//GEN-LAST:event_jMenuItemCidadesActionPerformed
 
     /**
      * @param args the command line arguments
