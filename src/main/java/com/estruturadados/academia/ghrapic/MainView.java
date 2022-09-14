@@ -4,6 +4,7 @@
  */
 package com.estruturadados.academia.ghrapic;
 
+import com.estruturadados.academia.util.UtilsFormularios;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
@@ -18,17 +19,17 @@ public class MainView extends javax.swing.JFrame {
     /**
      * Creates new form MainView
      */
-    public MainView() {        
-        initComponents();  
+    public MainView() {
+        initComponents();
         definirTeclasAtalho();
     }
-    
-    private void definirTeclasAtalho(){
+
+    private void definirTeclasAtalho() {
         //grupo de menu Sistema    
         jMenuSistema.setMnemonic(KeyEvent.VK_M);
         jMenuItemUsuarios.setMnemonic(KeyEvent.VK_R);
         jMenuItemSair.setMnemonic(KeyEvent.VK_S);
-        
+
         //grupo de menu
         jMenuCadastro.setMnemonic(KeyEvent.VK_C);
         jMenuItemAluno.setMnemonic(KeyEvent.VK_A);
@@ -36,12 +37,12 @@ public class MainView extends javax.swing.JFrame {
         jMenuItemModalidade.setMnemonic(KeyEvent.VK_M);
         jMenuItemGraduacao.setMnemonic(KeyEvent.VK_G);
         jMenuItemPlano.setMnemonic(KeyEvent.VK_P);
-        
+
         //grupo de menu financeiro
         jMenuFinanceiro.setMnemonic(KeyEvent.VK_F);
         jMenuItemMatricula.setMnemonic(KeyEvent.VK_M);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -173,19 +174,21 @@ public class MainView extends javax.swing.JFrame {
 
     private void jMenuItemUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUsuariosActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "teste");
+        ListagemUsuariosView tela = new ListagemUsuariosView();        
+        jDesktopPanelTelaPrincipal.add(tela);               
+        tela.setVisible(true);
     }//GEN-LAST:event_jMenuItemUsuariosActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_formWindowOpened
 
     private void jMenuItemSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSairActionPerformed
         // TODO add your handling code here:
         // retorno 0 = SIM, retorno 1 = NÃO
         int simOuNao = JOptionPane.showConfirmDialog(null, "Deseja realmente sair do sistema?", "Atenção", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        if(simOuNao == 0){
+        if (simOuNao == 0) {
             System.exit(0);
         }
     }//GEN-LAST:event_jMenuItemSairActionPerformed

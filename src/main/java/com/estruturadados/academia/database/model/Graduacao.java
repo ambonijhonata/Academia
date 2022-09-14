@@ -1,14 +1,14 @@
 package com.estruturadados.academia.database.model;
 
-public class Graduacoes {
+public class Graduacao {
     private String modalidade;
     private String graduacao;
 
-    public Graduacoes() {
+    public Graduacao() {
         
     }
 
-    public Graduacoes(String modalidade, String graduacao) {
+    public Graduacao(String modalidade, String graduacao) {
         this.modalidade = modalidade;
         this.graduacao = graduacao;
     }

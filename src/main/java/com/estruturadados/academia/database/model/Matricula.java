@@ -2,7 +2,7 @@ package com.estruturadados.academia.database.model;
 
 import java.util.Date;
 
-public class Matriculas {
+public class Matricula {
     
     private int codigo_matricula;
     private int codigo_aluno;
@@ -11,11 +11,11 @@ public class Matriculas {
     private Date data_encerramento;
 
 
-    public Matriculas() {
+    public Matricula() {
         
     }
     
-    public Matriculas(int codigo_matricula, int codigo_aluno, Date data_matricula, int dia_vencimento, Date data_encerramento) {
+    public Matricula(int codigo_matricula, int codigo_aluno, Date data_matricula, int dia_vencimento, Date data_encerramento) {
         this.codigo_matricula = codigo_matricula;
         this.codigo_aluno = codigo_aluno;
         this.data_matricula = data_matricula;

@@ -2,14 +2,16 @@ package com.estruturadados.academia.database.model;
 
 public class Usuario {
     private String usuario;
+    private String senha;
     private String perfil;
 
     public Usuario() {
         
     }
 
-    public Usuario(String usuario, String perfil) {
+    public Usuario(String usuario, String senha, String perfil) {
         this.usuario = usuario;
+        this.senha = senha;
         this.perfil = perfil;
     }
 
@@ -20,7 +22,15 @@ public class Usuario {
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
-
+    
+    public String getSenha(){
+        return senha;
+    }
+    
+    public void setSenha(String senha){
+        this.senha = senha;
+    }
+    
     public String getPerfil() {
         return perfil;
     }
