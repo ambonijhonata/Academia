@@ -24,7 +24,8 @@ public class Teste {
 		if (connection != null) {
 			System.out.println("CONECTADO");
 			
-			AlunoDAO dao = new AlunoDAO(connection);
+			AlunoDAO alunoDAO = new AlunoDAO(connection);
+            CidadeDAO cidadeDAO = new CidadeDAO(connection);
 			
 			/*Pessoa p = new Pessoa();
 			p.setNome("Junior");
@@ -34,8 +35,8 @@ public class Teste {
 			
 			System.out.println(fezInsert);*/
 			
-			List<Object> listaAluno = dao.Select();
-			List<Object> listaCidade = dao.Select();
+			List<Object> listaAluno = alunoDAO.Select();
+            List<Object> listaCidade = cidadeDAO.Select();
 			
 			
 			
