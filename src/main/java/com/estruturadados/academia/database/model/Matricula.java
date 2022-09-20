@@ -23,43 +23,43 @@ public class Matricula {
         this.dataEncerramento = data_encerramento;
     }
 
-    public int getCodigo_matricula() {
+    public int getCodigoMatricul() {
         return codigoMatricula;
     }
 
-    public void setCodigo_matricula(int codigo_matricula) {
+    public void setCodigoMatricula(int codigo_matricula) {
         this.codigoMatricula = codigo_matricula;
     }
 
-    public int getCodigo_aluno() {
+    public int getCodigoAluno() {
         return codigoAluno;
     }
 
-    public void setCodigo_aluno(int codigo_aluno) {
+    public void setCodigoAluno(int codigo_aluno) {
         this.codigoAluno = codigo_aluno;
     }
 
-    public Date getData_matricula() {
+    public Date getDataMatricula() {
         return dataMatricula;
     }
 
-    public void setData_matricula(Date data_matricula) {
+    public void setDataMatricula(Date data_matricula) {
         this.dataMatricula = data_matricula;
     }
 
-    public int getDia_vencimento() {
+    public int getDiaVencimento() {
         return dataVencimento;
     }
 
-    public void setDia_vencimento(int dia_vencimento) {
+    public void setDiaVencimento(int dia_vencimento) {
         this.dataVencimento = dia_vencimento;
     }
 
-    public Date getData_encerramento() {
+    public Date getDataEncerramento() {
         return dataEncerramento;
     }
 
-    public void setData_encerramento(Date data_encerramento) {
+    public void setDataEncerramento(Date data_encerramento) {
         this.dataEncerramento = data_encerramento;
     }
 
