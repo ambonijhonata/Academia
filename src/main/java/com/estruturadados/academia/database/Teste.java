@@ -6,6 +6,8 @@ import java.util.List;
 
 import com.estruturadados.academia.database.dao.AlunoDAO;
 import com.estruturadados.academia.database.model.Aluno;
+import com.estruturadados.academia.database.dao.CidadeDAO;
+import com.estruturadados.academia.database.model.Cidade;
 
 public class Teste {
 
@@ -33,16 +35,8 @@ public class Teste {
 			System.out.println(fezInsert);*/
 			
 			List<Object> listaAluno = dao.Select();
+			List<Object> listaCidade = dao.Select();
 			
-			for (int i = 0; i < listaAluno.size(); i++) {
-				
-				Aluno p = (Aluno)listaAluno.get(i);
-				System.out.println(p.getAluno());
-                System.out.println(p.getDataNascimento());
-                System.out.println(p.getSexo());
-				System.out.println("====================");
-				
-			}
 			
 			
 		} 
