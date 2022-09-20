@@ -13,7 +13,9 @@ public class AlunoDAO extends SistemaDAO {
 	
 	private Connection conexao;
 	private String select = "select * from public.alunos;";
-	private String insert = "INSERT INTO public.alunos(aluno, cep) VALUES (?, ?);";
+	private String insert = "INSERT INTO public.alunos "+
+                            "(aluno,data_nascimento,sexo,telefone,celular,email,observacao,endereco,numero,complemento,bairro,cidade,estado,pais,cep) "+
+                            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 	
 	private PreparedStatement pstSelect;
 	private PreparedStatement pstInsert;
@@ -66,5 +68,9 @@ public class AlunoDAO extends SistemaDAO {
 	public long Update(Object param) {
 		return 0;
 	}
-
+    @Override
+    public String toString() {
+        
+        return super.toString();
+    }
 }

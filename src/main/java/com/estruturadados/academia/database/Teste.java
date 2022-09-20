@@ -32,12 +32,14 @@ public class Teste {
 			
 			System.out.println(fezInsert);*/
 			
-			List<Object> listaPessoa = dao.Select();
+			List<Object> listaAluno = dao.Select();
 			
-			for (int i = 0; i < listaPessoa.size(); i++) {
+			for (int i = 0; i < listaAluno.size(); i++) {
 				
-				Aluno p = (Aluno)listaPessoa.get(i);
-				System.out.println(p);
+				Aluno p = (Aluno)listaAluno.get(i);
+				System.out.println(p.getAluno());
+                System.out.println(p.getCep());
+                System.out.println(p.get)
 				System.out.println("====================");
 				
 			}
