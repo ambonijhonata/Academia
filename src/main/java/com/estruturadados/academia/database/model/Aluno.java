@@ -1,12 +1,14 @@
 package com.estruturadados.academia.database.model;
 
 import java.util.Date;
+import java.util.List;
+
 
 public class Aluno {
 
-	private int codigo_aluno;
+	private int codigoAluno;
 	private String aluno;
-	private Date data_nascimento;
+	private Date dataNascimento;
 	private char sexo;
     private String telefone;
     private String celular;
@@ -26,9 +28,9 @@ public class Aluno {
 	}
 
     public Aluno(int codigo_aluno, String aluno, Date data_nascimento, char sexo, String telefone, String celular, String email, String observacao, String endereco, String numero, String complemento, String bairro, String cidade, String estado, String pais, String cep) {
-        this.codigo_aluno = codigo_aluno;
+        this.codigoAluno = codigo_aluno;
         this.aluno = aluno;
-        this.data_nascimento = data_nascimento;
+        this.dataNascimento = data_nascimento;
         this.sexo = sexo;
         this.telefone = telefone;
         this.celular = celular;
@@ -45,11 +47,11 @@ public class Aluno {
     }
 
     public int getCodigoAluno() {
-        return codigo_aluno;
+        return codigoAluno;
     }
 
     public void setCodigoAluno(int codigo_aluno) {
-        this.codigo_aluno = codigo_aluno;
+        this.codigoAluno = codigo_aluno;
     }
 
     public String getAluno() {
@@ -61,11 +63,11 @@ public class Aluno {
     }
 
     public Date getDataNascimento() {
-        return data_nascimento;
+        return dataNascimento;
     }
 
     public void setDataNascimento(Date data_nascimento) {
-        this.data_nascimento = data_nascimento;
+        this.dataNascimento = data_nascimento;
     }
 
     public char getSexo() {
@@ -172,4 +174,28 @@ public class Aluno {
         this.cep = cep;
     }
 
+    public void ImprimeAluno(List<Aluno> listaAluno) {
+        for (int i = 0; i < listaAluno.size(); i++) {
+				
+            Aluno p = (Aluno)listaAluno.get(i);
+            System.out.println(p.getAluno());
+            System.out.println(p.getDataNascimento());
+            System.out.println(p.getSexo());
+            System.out.println(p.getTelefone());
+            System.out.println(p.getCelular());
+            System.out.println(p.getEmail());
+            System.out.println(p.getObservacao());
+            System.out.println(p.getEndereco());
+            System.out.println(p.getNumero());
+            System.out.println(p.getComplemento());
+            System.out.println(p.getBairro());
+            System.out.println(p.getCidade());
+            System.out.println(p.getEstado());
+            System.out.println(p.getPais());
+            System.out.println(p.getCep());
+            System.out.println("====================");
+            //"(aluno,data_nascimento,sexo,telefone,celular,email,observacao,endereco,numero,complemento,bairro,cidade,estado,pais,cep)
+            
+        }
+    }
 }

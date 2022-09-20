@@ -16,6 +16,10 @@ public class AlunoDAO extends SistemaDAO {
 	private String insert = "INSERT INTO public.alunos "+
                             "(aluno,data_nascimento,sexo,telefone,celular,email,observacao,endereco,numero,complemento,bairro,cidade,estado,pais,cep) "+
                             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    private String update = "UPDATE public.alunos "+
+                            "SET aluno=?, data_nascimento=?, sexo=?, telefone=?, celular=?, email=?, observacao=?, endereco=?, numero=?, complemento=?, bairro=?, cidade=?, estado=?, pais=?, cep=? "+
+                            "WHERE codigo_aluno=?;";
+    private String delete = "DELETE FROM public.alunos WHERE codigo_aluno=?;";
 	
 	private PreparedStatement pstSelect;
 	private PreparedStatement pstInsert;
@@ -58,6 +62,7 @@ public class AlunoDAO extends SistemaDAO {
 		
 		return pstInsert.getUpdateCount();
 	}
+    
 
 	@Override
 	public long Delete(Object param) {
@@ -68,9 +73,5 @@ public class AlunoDAO extends SistemaDAO {
 	public long Update(Object param) {
 		return 0;
 	}
-    @Override
-    public String toString() {
-        
-        return super.toString();
-    }
+    
 }

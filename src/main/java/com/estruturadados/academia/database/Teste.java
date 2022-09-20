@@ -38,8 +38,8 @@ public class Teste {
 				
 				Aluno p = (Aluno)listaAluno.get(i);
 				System.out.println(p.getAluno());
-                System.out.println(p.getCep());
-                System.out.println(p.get)
+                System.out.println(p.getDataNascimento());
+                System.out.println(p.getSexo());
 				System.out.println("====================");
 				
 			}
