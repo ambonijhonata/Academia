@@ -1,8 +1,11 @@
+package com.estruturadados.academia.database.dao;
+
 import com.estruturadados.academia.database.model.Matricula;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +26,8 @@ public class MatriculaDAO extends SistemaDAO {
 
   private PreparedStatement pstSelect;
   private PreparedStatement pstInsert;
+  private PreparedStatement pstUpdate;
+  private PreparedStatement pstDelete;
 
   @Override
   public List<Object> Select() throws SQLException {
@@ -31,8 +36,11 @@ public class MatriculaDAO extends SistemaDAO {
 
     while (resultado.next()) {
       Matricula p = new Matricula();
-      p.setCodigo_matricula("codigo_matricula");
-     
+      p.setCodigoMatricula(resultado.getInt("codigo_matricula"));
+      p.setCodigoAluno(resultado.getInt("codigo_aluno"));
+      p.setDataMatricula(resultado.getDate("data_matricula"));
+      p.setDataEncerramento(resultado.getDate("data_encerramento"));
+      p.setDiaVencimento(resultado.getInt("dia_vencimento"));
 
       arlPessoa.add(p);
     }
@@ -42,9 +50,12 @@ public class MatriculaDAO extends SistemaDAO {
 
   @Override
   public int Insert(Object param) throws SQLException {
-    Aluno p = (Aluno) param;
-    pstInsert.setString(1, p.getAluno());
-    pstInsert.setString(2, p.getCep());
+    Matricula p = (Matricula) param;
+
+    pstInsert.setInt(1, p.getCodigoMatricul());
+    pstInsert.setInt(2, p.getCodigoAluno());
+    pstInsert.setInt(3, p.getDiaVencimento());
+    pstInsert.setTimestamp(4, new Timestamp(p.getDataEncerramento().getTime()));
 
     pstInsert.execute();
 
@@ -53,11 +64,33 @@ public class MatriculaDAO extends SistemaDAO {
 
   @Override
   public long Delete(Object param) {
+    Matricula p = (Matricula) param;
+    try {
+      pstDelete.setInt(1, p.getCodigoMatricul());
+      pstDelete.execute();
+      return pstDelete.getUpdateCount();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
     return 0;
   }
 
-  @Override
   public long Update(Object param) {
+    Matricula p = (Matricula) param;
+    try {
+      pstUpdate.setInt(1, p.getCodigoMatricul());
+      pstUpdate.setInt(2, p.getCodigoAluno());
+      pstUpdate.setInt(3, p.getDiaVencimento());
+      pstUpdate.setTimestamp(
+        4,
+        new Timestamp(p.getDataEncerramento().getTime())
+      );
+
+      pstUpdate.execute();
+      return pstUpdate.getUpdateCount();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
     return 0;
   }
 }
