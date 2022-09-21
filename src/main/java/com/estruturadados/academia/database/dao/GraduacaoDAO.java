@@ -1,9 +1,13 @@
 package com.estruturadados.academia.database.dao;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
 public class GraduacaoDAO extends SistemaDAO {
+
+    private Connection conexao;
+
 
     @Override
     public long Delete(Object param) {
