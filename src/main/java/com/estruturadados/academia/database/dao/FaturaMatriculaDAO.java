@@ -2,8 +2,10 @@ package com.estruturadados.academia.database.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.estruturadados.academia.database.model.FaturasMatricula;
@@ -49,20 +51,26 @@ public class FaturaMatriculaDAO extends SistemaDAO{
         pstInsert.setDouble(3, f.getValor());
         pstInsert.setTimestamp(4, new Timestamp(f.getDataPagamento().getTime()));
         pstInsert.setTimestamp(5, new Timestamp(f.getDataCancelamento().getTime()));
-
+        pstInsert.execute();
         return 0;
     }
 
     @Override
     public List<Object> Select() throws SQLException {
         FaturasMatricula f = new FaturasMatricula();
-        pstSelect.setLong(1, f.getCodigoMatricula());
-        pstSelect.setTimestamp(2, new Timestamp(f.getDataVencimento().getTime()));
-        pstSelect.setDouble(3, f.getValor());
-        pstSelect.setTimestamp(4, new Timestamp(f.getDataPagamento().getTime()));
-        pstSelect.setTimestamp(5, new Timestamp(f.getDataCancelamento().getTime()));
+        List<Object> lista = new ArrayList<>();
 
-        return null;
+        ResultSet resultado =  pstSelect.executeQuery();
+        while (resultado.next()) {
+            f.setCodigoMatricula(resultado.getInt("codigo_matricula"));
+            f.setDataVencimento(resultado.getDate("data_vencimento"));
+            f.setValor(resultado.getDouble("valor"));
+            f.setDataPagamento(resultado.getDate("data_pagamento"));
+            f.setDataCancelamento(resultado.getDate("data_cancelamento"));
+            lista.add(f);
+        }
+        
+        return lista;
     }
 
     @Override
