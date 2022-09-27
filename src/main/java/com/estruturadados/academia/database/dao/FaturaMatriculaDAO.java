@@ -57,11 +57,13 @@ public class FaturaMatriculaDAO extends SistemaDAO{
 
     @Override
     public List<Object> Select() throws SQLException {
-        FaturasMatricula f = new FaturasMatricula();
+        
         List<Object> lista = new ArrayList<>();
 
         ResultSet resultado =  pstSelect.executeQuery();
         while (resultado.next()) {
+            FaturasMatricula f = new FaturasMatricula();
+            
             f.setCodigoMatricula(resultado.getInt("codigo_matricula"));
             f.setDataVencimento(resultado.getDate("data_vencimento"));
             f.setValor(resultado.getDouble("valor"));

@@ -15,7 +15,7 @@ public class MatriculaModalidadeDAO extends SistemaDAO{
     private Connection conexao;
     private String select = "select * from public.matriculas_modalidades;";
     private String insert = "insert into public.matriculas_modalidades (codigo_matricula, modalidade, graduacao, plano, data_inicio, data_fim) values ( ?, ?, ?, ?, ?, ?);";
-    private String update = "update public.matriculas_modalidades (codigo_matricula, modalidade, graduacao, plano, data_inicio, data_fim) values ( ?, ?, ?, ?, ?, ?);";
+    private String update = "update public.matriculas_modalidades set data_fim = ? where codigo_matricula = ? and modalidade = ?;";
     private String delete = "delete from public.matriculas_modalidades where codigo_matricula = ? ;";
 
     private PreparedStatement pstSelect;
@@ -58,12 +58,12 @@ public class MatriculaModalidadeDAO extends SistemaDAO{
 
     @Override
     public List<Object> Select() throws SQLException {
-        MatriculasModalidades mm = new MatriculasModalidades();
 
-        ResultSet resultado =  pstSelect.executeQuery();
+        ResultSet resultado = pstSelect.executeQuery();
         List<Object> lista = new ArrayList<Object>();
 
         while(resultado.next()){
+            MatriculasModalidades mm = new MatriculasModalidades();
             mm.setCodigoMatricula(resultado.getInt("codigo_matricula"));
             mm.setModalidade(resultado.getString("modalidade"));
             mm.setGraduacao(resultado.getString("graduacao"));

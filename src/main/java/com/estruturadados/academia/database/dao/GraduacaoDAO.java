@@ -13,7 +13,8 @@ public class GraduacaoDAO extends SistemaDAO {
     private Connection conexao;
     private String select = "select * from public.graduacoes;";
     private String insert = "insert into public.graduacoes (modalidade, graduacao) values ( ?, ?);";
-    private String update = "update public.graduacoes (modalidade, graduacao) values ( ?, ?);";
+    private String update = "update public.graduacoes set modalidade = ?, graduacao = ? where modalidade = ? and graduacao = ?;";
+    private String delete = "delete from public.graduacoes where modalidade = ? and graduacao = ?;";
 
     private PreparedStatement pstSelect;
 	private PreparedStatement pstInsert;
@@ -25,6 +26,7 @@ public class GraduacaoDAO extends SistemaDAO {
         pstSelect = this.conexao.prepareStatement(select);
         pstInsert = this.conexao.prepareStatement(insert);
         pstUpdate = this.conexao.prepareStatement(update);
+        pstDelete = this.conexao.prepareStatement(delete);
     }
 
     @Override
@@ -52,11 +54,12 @@ public class GraduacaoDAO extends SistemaDAO {
 
     @Override
     public List<Object> Select() throws SQLException {
-        Graduacao g = new Graduacao();
+        
         List<Object> lista = new ArrayList<>();
 
         ResultSet resultado =  pstSelect.executeQuery();
         while (resultado.next()) {
+            Graduacao g = new Graduacao();
             g.setModalidade(resultado.getString("modalidade"));
             g.setGraduacao(resultado.getString("graduacao"));
             lista.add(g);
