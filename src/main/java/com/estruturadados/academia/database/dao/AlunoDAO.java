@@ -92,7 +92,7 @@ public class AlunoDAO extends SistemaDAO {
         
 		pstInsert.execute();
 		
-		return pstInsert.getUpdateCount();
+		return 0;
 	}
     
 
