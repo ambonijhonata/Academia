@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.spi.DirStateFactory.Result;
-
 import com.estruturadados.academia.database.model.Plano;
 
 public class PlanoDAO extends SistemaDAO{
