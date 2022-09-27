@@ -14,7 +14,7 @@ public class PlanoDAO extends SistemaDAO{
     private Connection conexao;
     private String select = "select * from public.planos;";
     private String insert = "insert into public.planos (modalidade, plano, valor_mensal) values ( ?, ?, ?);";
-    private String update = "update public.planos set modalidade = ?, plano = ?, valor_mensal = ? where modalidade = ? and plano = ?;";
+    private String update = "update public.planos set plano = ? where modalidade = ? and plano = ?;";
     private String delete = "delete from public.planos where modalidade = ? and plano = ?;";
     
     private PreparedStatement pstSelect;
@@ -72,10 +72,6 @@ public class PlanoDAO extends SistemaDAO{
     public long Update(Object param) {
         Plano p = (Plano) param;
         try{
-            pstUpdate.setString(1, p.getModalidade());
-            pstUpdate.setString(2, p.getPlano());
-            pstUpdate.setDouble(3, p.getValorMensal());
-            pstUpdate.setString(4, p.getModalidade());
             pstUpdate.setString(5, p.getPlano());
             pstUpdate.execute();
         } catch (SQLException e) {

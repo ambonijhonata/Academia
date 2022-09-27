@@ -80,11 +80,6 @@ public class MatriculaModalidadeDAO extends SistemaDAO{
     public long Update(Object param) {
         MatriculasModalidades mm = (MatriculasModalidades) param;
         try{
-            pstUpdate.setInt(1, mm.getCodigoMatricula());
-            pstUpdate.setString(2, mm.getModalidade());
-            pstUpdate.setString(3, mm.getGraduacao());
-            pstUpdate.setString(4, mm.getPlano());
-            pstUpdate.setTimestamp(5, new Timestamp(mm.getDataInicio().getTime()));
             pstUpdate.setTimestamp(6, new Timestamp(mm.getDataFim().getTime()));
             pstUpdate.execute();
         } catch (SQLException e) {

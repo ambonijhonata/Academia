@@ -10,24 +10,22 @@ import java.util.List;
 
 import com.estruturadados.academia.database.model.Assiduidade;
 
+// Só vai select, insert e delete
 public class AssiduidadeDAO extends SistemaDAO{
 
     private Connection conexao;
-    private String select = "select * from public.assiduidade;";
+    private String select = "select * from public.assiduidade";
     private String insert = "insert into public.assiduidade (codigo_matricula, data_entrada) values (?, ?);";
-    private String update = "update public.assiduidade set codigo_matricula = ?, data_entrada = ? where codigo_matricula = ?;";
     private String delete = "delete from public.assiduidade where codigo_matricula = ?;";
     
     private PreparedStatement pstSelect;
 	private PreparedStatement pstInsert;
-	private PreparedStatement pstUpdate;
 	private PreparedStatement pstDelete;
 
     public AssiduidadeDAO(Connection conexao) throws SQLException {
         this.conexao = conexao;
         pstSelect = this.conexao.prepareStatement(select);
         pstInsert = this.conexao.prepareStatement(insert);
-        pstUpdate = this.conexao.prepareStatement(update);
         pstDelete = this.conexao.prepareStatement(delete);
     }
     
@@ -67,19 +65,11 @@ public class AssiduidadeDAO extends SistemaDAO{
         }
         return arlAssiduidade;
     }
-
     @Override
     public long Update(Object param) {
-        Assiduidade a = (Assiduidade) param;
-        try {
-            pstUpdate.setInt(1, a.getCodigoMatricula());
-            pstUpdate.setTimestamp(2, new Timestamp(a.getDataEntrada().getTime()));
-            pstUpdate.setInt(3, a.getCodigoMatricula());
-            pstUpdate.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        // TODO Auto-generated method stub
         return 0;
     }
+
 }
 

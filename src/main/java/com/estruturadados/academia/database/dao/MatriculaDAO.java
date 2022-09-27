@@ -16,21 +16,16 @@ public class MatriculaDAO extends SistemaDAO {
     private String insert = "INSERT INTO public.matriculas " +
             "(codigo_matricula,codigo_aluno,data_matricula,dia_vencimento,data_encerramento) " +
             "VALUES (?, ?, ?, ?, ?);";
-    private String update = "UPDATE public.matriculas " +
-            "SET codigo_matricula=?, codigo_aluno=?, data_matricula=?, dia_vencimento=?, data_encerramento=? " +
-            "WHERE codigo_matricula=?;";
     private String delete = "DELETE FROM public.matriculas WHERE codigo_matricula=?;";
 
     private PreparedStatement pstSelect;
     private PreparedStatement pstInsert;
-    private PreparedStatement pstUpdate;
     private PreparedStatement pstDelete;
 
     public MatriculaDAO(Connection conexao) throws SQLException {
         this.conexao = conexao;
         pstSelect = this.conexao.prepareStatement(select);
         pstInsert = this.conexao.prepareStatement(insert);
-        pstUpdate = this.conexao.prepareStatement(update);
         pstDelete = this.conexao.prepareStatement(delete);
     }
 
@@ -81,20 +76,7 @@ public class MatriculaDAO extends SistemaDAO {
     }
 
     public long Update(Object param) {
-        Matricula p = (Matricula) param;
-        try {
-            pstUpdate.setInt(1, p.getCodigoMatricul());
-            pstUpdate.setInt(2, p.getCodigoAluno());
-            pstUpdate.setInt(3, p.getDiaVencimento());
-            pstUpdate.setTimestamp(
-                    4,
-                    new Timestamp(p.getDataEncerramento().getTime()));
-
-            pstUpdate.execute();
-            return pstUpdate.getUpdateCount();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        
         return 0;
     }
 }

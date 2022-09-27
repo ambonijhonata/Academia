@@ -13,7 +13,7 @@ public class GraduacaoDAO extends SistemaDAO {
     private Connection conexao;
     private String select = "select * from public.graduacoes;";
     private String insert = "insert into public.graduacoes (modalidade, graduacao) values ( ?, ?);";
-    private String update = "update public.graduacoes set modalidade = ?, graduacao = ? where modalidade = ? and graduacao = ?;";
+    private String update = "update public.graduacoes set graduacao = ? where modalidade = ? and graduacao = ?;";
     private String delete = "delete from public.graduacoes where modalidade = ? and graduacao = ?;";
 
     private PreparedStatement pstSelect;
@@ -72,7 +72,6 @@ public class GraduacaoDAO extends SistemaDAO {
     public long Update(Object param) {
         Graduacao g = (Graduacao) param;
         try{
-            pstUpdate.setString(1, g.getModalidade());
             pstUpdate.setString(2, g.getGraduacao());
             pstUpdate.execute();
         } catch (SQLException e) {

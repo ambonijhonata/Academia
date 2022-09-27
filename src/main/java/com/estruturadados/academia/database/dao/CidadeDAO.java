@@ -9,24 +9,19 @@ import java.util.List;
 
 import com.estruturadados.academia.database.model.Cidade;
 
+// Só vai select e delete
 public class CidadeDAO extends SistemaDAO {
 
     private Connection conexao;
 	private String select = "select * from public.cidades;";
-    private String insert = "insert into public.cidades (cidade, estado, pais) values (?, ?, ?);";
-    private String update = "update public.cidades set cidade = ?, estado = ? where cidade = ?;";
-    private String delete = "delete from public.cidades where cidade = ?;";
+    private String delete = "delete from public.cidades where codigo_cidade = ?;";
 
     private PreparedStatement pstSelect;
-	private PreparedStatement pstInsert;
-	private PreparedStatement pstUpdate;
 	private PreparedStatement pstDelete;
 
     public CidadeDAO(Connection conexao) throws SQLException {
         this.conexao = conexao;
         pstSelect = this.conexao.prepareStatement(select);
-        pstInsert = this.conexao.prepareStatement(insert);
-        pstUpdate = this.conexao.prepareStatement(update);
         pstDelete = this.conexao.prepareStatement(delete);
     }
 
@@ -50,14 +45,7 @@ public class CidadeDAO extends SistemaDAO {
 
     @Override
     public int Insert(Object param) throws SQLException{
-        Cidade c = (Cidade) param;
-        pstInsert.setString(1, c.getCidade());
-        pstInsert.setString(2, c.getEstado());
-        pstInsert.setString(3, c.getPais());
-        
-        pstInsert.execute();
-
-        return pstInsert.getUpdateCount();
+        return 0;
     }
 
     @Override
@@ -74,15 +62,6 @@ public class CidadeDAO extends SistemaDAO {
 
     @Override
 	public long Update(Object param){
-        Cidade c = (Cidade)param;
-        try {
-            pstUpdate.setString(1, c.getCidade());
-            pstUpdate.setString(2, c.getEstado());
-            pstUpdate.setString(3, c.getCidade());
-            pstUpdate.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         return 0;
     }
 }
