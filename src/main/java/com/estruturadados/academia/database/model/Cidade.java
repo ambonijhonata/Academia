@@ -5,8 +5,8 @@ public class Cidade {
     private String estado;
     private String pais;
 
-    public Cidade(){
-        
+    public Cidade() {
+
     }
 
     public Cidade(String cidade, String estado, String pais) {
