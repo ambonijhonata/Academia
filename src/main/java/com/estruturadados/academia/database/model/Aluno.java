@@ -174,28 +174,15 @@ public class Aluno {
         this.cep = cep;
     }
 
-    public void ImprimeAluno(List<Aluno> listaAluno) {
-        for (int i = 0; i < listaAluno.size(); i++) {
-				
-            Aluno p = (Aluno)listaAluno.get(i);
-            System.out.println(p.getAluno());
-            System.out.println(p.getDataNascimento());
-            System.out.println(p.getSexo());
-            System.out.println(p.getTelefone());
-            System.out.println(p.getCelular());
-            System.out.println(p.getEmail());
-            System.out.println(p.getObservacao());
-            System.out.println(p.getEndereco());
-            System.out.println(p.getNumero());
-            System.out.println(p.getComplemento());
-            System.out.println(p.getBairro());
-            System.out.println(p.getCidade());
-            System.out.println(p.getEstado());
-            System.out.println(p.getPais());
-            System.out.println(p.getCep());
-            System.out.println("====================");
-            //"(aluno,data_nascimento,sexo,telefone,celular,email,observacao,endereco,numero,complemento,bairro,cidade,estado,pais,cep)
-            
-        }
+    @Override
+    public String toString() {
+        return "Codigo Aluno: " + this.codigoAluno + ", Aluno: " + 
+        this.aluno + ", Data Nascimento: " + this.dataNascimento + ", Sexo: " + 
+        this.sexo + ", Telefone: " + this.telefone + ", Celular: " + this.celular + ", E-mail: " + 
+        this.email + ", Observação: " + this.observacao + ", Endereço: " + this.endereco + ", Número: " + 
+        this.numero + ", Complemento: " + this.complemento + ", Bairro: " + this.bairro + ", Cidade: " + 
+        this.cidade + ", Estado: " + this.estado + ", País: " + this.pais + ", CEP: " + this.cep;
+
+        //return super.toString();
     }
 }
