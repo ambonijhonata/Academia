@@ -18,4 +18,9 @@ public class Modalidade {
     public void setModalidade(String modalidade) {
         this.modalidade = modalidade;
     }
+
+    @Override
+    public String toString() {
+        return "modalidade=" + modalidade + "";
+    }
 }

@@ -63,4 +63,8 @@ public class Matricula {
         this.dataEncerramento = data_encerramento;
     }
 
+    @Override
+    public String toString() {
+        return "codigoMatricula=" + codigoMatricula + ", codigoAluno=" + codigoAluno + ", dataMatricula=" + dataMatricula + ", diaVencimento=" + dataVencimento + ", dataEncerramento=" + dataEncerramento + "";
+    }
 }

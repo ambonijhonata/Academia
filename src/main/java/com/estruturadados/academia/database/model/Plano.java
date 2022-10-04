@@ -39,4 +39,9 @@ public class Plano {
         this.valorMensal = valorMensal;
     }
 
+    @Override
+    public String toString() {
+        return "modalidade=" + modalidade + ", plano=" + plano + ", valorMensal=" + valorMensal + "";
+    }
+
 }

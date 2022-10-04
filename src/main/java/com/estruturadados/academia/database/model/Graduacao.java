@@ -28,4 +28,9 @@ public class Graduacao {
     public void setGraduacao(String graduacao) {
         this.graduacao = graduacao;
     }
+
+    @Override
+    public String toString() {
+        return "modalidade=" + modalidade + ", graduacao=" + graduacao + "";
+    }
 }

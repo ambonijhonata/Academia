@@ -31,4 +31,9 @@ public class Assiduidade {
         this.dataEntrada = dataEntrada;
     }
 
+    @Override
+    public String toString() {
+        return "codigoMatricula=" + codigoMatricula + ", dataEntrada=" + dataEntrada + "";
+    }
+
 }

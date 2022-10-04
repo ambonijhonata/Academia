@@ -71,4 +71,8 @@ public class MatriculasModalidades {
         this.dataFim = dataFim;
     }
 
+    @Override
+    public String toString() {
+        return "codigoMatricula=" + codigoMatricula + ", modalidade=" + modalidade + ", graduacao=" + graduacao + ", plano=" + plano + ", dataInicio=" + dataInicio + ", dataFim=" + dataFim + "";
+    }
 }

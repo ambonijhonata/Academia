@@ -62,5 +62,9 @@ public class FaturasMatricula {
         this.dataCancelamento = dataCancelamento;
     }
 
+    @Override
+    public String toString() {
+        return "codigoMatricula=" + codigoMatricula + ", dataVencimento=" + dataVencimento + ", valor=" + valor + ", dataPagamento=" + dataPagamento + ", dataCancelamento=" + dataCancelamento + "";
+    }
 
 }
