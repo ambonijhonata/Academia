@@ -27,7 +27,7 @@ public class Teste {
       List<Object> listaAluno = alunoDAO.Select();
 
       for (Object o : listaAluno) {
-        System.out.println(((Aluno) o).getAluno());
+        System.out.println(((Aluno) o).toString());
       }
       //   List<Object> listaCidade = cidadeDAO.Select();
 
