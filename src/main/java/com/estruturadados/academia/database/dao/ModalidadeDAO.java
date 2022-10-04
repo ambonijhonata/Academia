@@ -17,10 +17,9 @@ public class ModalidadeDAO extends SistemaDAO{
     
     private PreparedStatement pstSelect;
 	private PreparedStatement pstInsert;
-	private PreparedStatement pstUpdate;
 	private PreparedStatement pstDelete;
     
-    public ModalidadeDAO() throws SQLException {
+    public ModalidadeDAO(Connection conexao) throws SQLException {
         this.conexao = conexao;
         pstSelect = this.conexao.prepareStatement(select);
         pstInsert = this.conexao.prepareStatement(insert);
