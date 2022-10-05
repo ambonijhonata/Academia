@@ -18,11 +18,11 @@ import java.util.List;
  */
 public class UsuarioDAO extends SistemaDAO {
 
-    private Connection connection;
-    private String select = "SELECT * FROM public.usuarios";
-    private String insert = "INSERT INTO public.usuarios (usuario, senha, perfil) VALUES (?, ?, ?)";
-    private String delete = "DELETE FROM public.usuarios WHERE usuario = ? AND senha = ?";    
-    private String update = "UPDATE public.usuarios SET usuario = ?, senha = ?, perfil = ? WHERE usuario = ? AND senha = ?";
+    private final Connection connection;
+    private final String select = "SELECT * FROM public.usuarios";
+    private final String insert = "INSERT INTO public.usuarios (usuario, senha, perfil) VALUES (?, ?, ?)";
+    private final String delete = "DELETE FROM public.usuarios WHERE usuario = ? AND senha = ?";    
+    private final String update = "UPDATE public.usuarios SET usuario = ?, senha = ?, perfil = ? WHERE usuario = ? AND senha = ?";
     
     private PreparedStatement psSelect;
     private PreparedStatement psInsert;
