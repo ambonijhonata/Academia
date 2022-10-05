@@ -1,34 +1,35 @@
 package com.estruturadados.academia.database.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+import com.estruturadados.academia.database.model.Modalidade;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
-import com.estruturadados.academia.database.model.Modalidade;
+public class ModalidadeDAO extends SistemaDAO {
 
-public class ModalidadeDAO extends SistemaDAO{
     private Connection conexao;
     private String select = "select * from modalidade";
     private String insert = "insert into modalidade (modalidade) VALUES (?)";
     private String delete = "delete from modalidade where modalidade = ? ;";
-    
+
     private PreparedStatement pstSelect;
-	private PreparedStatement pstInsert;
-	private PreparedStatement pstDelete;
-    
+    private PreparedStatement pstInsert;
+    private PreparedStatement pstDelete;
+
     public ModalidadeDAO(Connection conexao) throws SQLException {
         this.conexao = conexao;
         pstSelect = this.conexao.prepareStatement(select);
         pstInsert = this.conexao.prepareStatement(insert);
         pstDelete = this.conexao.prepareStatement(delete);
     }
+
     @Override
     public long Delete(Object param) {
         Modalidade m = (Modalidade) param;
-        try{
+        try {
             pstDelete.setString(1, m.getModalidade());
             pstDelete.execute();
         } catch (SQLException e) {
@@ -48,7 +49,7 @@ public class ModalidadeDAO extends SistemaDAO{
     public List<Object> Select() throws SQLException {
         ResultSet resultado = pstSelect.executeQuery();
         List<Object> lista = new ArrayList<Object>();
-        while(resultado.next()){
+        while (resultado.next()) {
             Modalidade m = new Modalidade();
             m.setModalidade(resultado.getString("modalidade"));
             lista.add(m);
@@ -57,9 +58,14 @@ public class ModalidadeDAO extends SistemaDAO{
     }
 
     @Override
-    public long Update(Object param) {
+    public long Update(Object param, Object param2) {
         // TODO Auto-generated method stub
         return 0;
+    }
+
+    @Override
+    public Object SelectWithCondition(Object param) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

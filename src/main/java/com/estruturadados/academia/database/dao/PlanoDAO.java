@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.estruturadados.academia.database.model.Plano;
+import com.estruturadados.academia.database.model.Usuario;
 
 public class PlanoDAO extends SistemaDAO{
     
@@ -69,7 +70,7 @@ public class PlanoDAO extends SistemaDAO{
     }
 
     @Override
-    public long Update(Object param) {
+    public long Update(Object param, Object param2) {
         Plano p = (Plano) param;
         try{
             pstUpdate.setString(5, p.getPlano());
@@ -78,6 +79,11 @@ public class PlanoDAO extends SistemaDAO{
             e.printStackTrace();
         }
         return 0;
+    }
+
+    @Override
+    public Usuario SelectWithCondition(Object usuarioBuscar) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

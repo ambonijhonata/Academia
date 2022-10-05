@@ -10,6 +10,7 @@ import java.util.List;
 
 // Só tem select, insert e update
 import com.estruturadados.academia.database.model.FaturasMatricula;
+import com.estruturadados.academia.database.model.Usuario;
 
 public class FaturaMatriculaDAO extends SistemaDAO{
     
@@ -74,8 +75,13 @@ public class FaturaMatriculaDAO extends SistemaDAO{
     }
 
     @Override
-    public long Update(Object param) {
-        return 0;
+    public Usuario SelectWithCondition(Object usuarioBuscar) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public long Update(Object param, Object param2) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

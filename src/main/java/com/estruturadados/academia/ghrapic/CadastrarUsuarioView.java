@@ -4,8 +4,11 @@
  */
 package com.estruturadados.academia.ghrapic;
 
+import com.estruturadados.academia.controler.CadastrarUsuarioViewController;
 import com.estruturadados.academia.database.model.Usuario;
 import java.awt.event.KeyEvent;
+import java.sql.Connection;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,29 +19,43 @@ public class CadastrarUsuarioView extends javax.swing.JInternalFrame {
     /**
      * Creates new form CadastrarUsuarioView
      */
-    
+    private Connection connection;
+    private CadastrarUsuarioViewController controller;
+    private Usuario usuario;
     private boolean isEdicao = false;
-    
-    public CadastrarUsuarioView(Usuario usuario) {
+
+    //esse trabalho foi desenvolvido a partir de um banco de dados pronto ofertado pelo professor.
+    //por motivo nenhum(Não foi explicado mesmo quando solicitado), foi usado chave composta e também chaves como String nas tabelas, não sendo possível fazer
+    private String chaveTabela;
+
+    public CadastrarUsuarioView(Connection connection, Usuario usuario) {
         initComponents();
         definirTeclasAtalho();
-        
-        if(usuario != null){
+
+        this.usuario = usuario;
+        this.connection = connection;
+        controller = new CadastrarUsuarioViewController(connection);
+
+        if (usuario != null) {
             carregarDadosEdicao(usuario);
         }
     }
-    
-    private void definirTeclasAtalho(){
+
+    private void definirTeclasAtalho() {
         jButtonGravar.setMnemonic(KeyEvent.VK_G);
         jButtonCancelar.setMnemonic(KeyEvent.VK_C);
-        
+
     }
-    
-    public void carregarDadosEdicao(Usuario usuario){
-        //vai no banco, busca o usuario e preenche os campos em tela
-        //NAO INSTANCIAR OUTRO USUARIO, PREENCHER O QUE JA FOI PASSADO POR PARAMETRO E DEPOIS SO SETTAR EM TELA
+
+    public void carregarDadosEdicao(Usuario usuario) {
         isEdicao = true;//na hora de clicar em gravar verificar, se for true, chama a edição no DAO.
+        txtUsuario.setText(usuario.getUsuario());
+        txtSenha.setText(usuario.getSenha());
+        cmbPerfil.setSelectedItem(usuario.getPerfil());
+        chaveTabela = usuario.getUsuario();//ao fazer um update é necessária a pk do usuário, se não guardar aqui, não da de editar, ou seja uma variável a mais sem motivo nenhum.
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -68,7 +85,7 @@ public class CadastrarUsuarioView extends javax.swing.JInternalFrame {
 
         lblPerfil.setText("Perfil:");
 
-        cmbPerfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione um perfil...", "Administrador", "Cadastral", "Financeiro" }));
+        cmbPerfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Cadastral", "Financeiro" }));
 
         jButtonGravar.setText("Gravar");
         jButtonGravar.addActionListener(new java.awt.event.ActionListener() {
@@ -157,12 +174,37 @@ public class CadastrarUsuarioView extends javax.swing.JInternalFrame {
 
     private void jButtonGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGravarActionPerformed
         // TODO add your handling code here:
-        Usuario usuario = new Usuario();
-        usuario.setUsuario(txtUsuario.getText());
-        usuario.setSenha(String.valueOf(txtSenha.getPassword()));
-        usuario.setPerfil(String.valueOf(cmbPerfil.getSelectedItem()));
-        
-        //enviar o usuario pro banco através da classe DAO
+        String txtUsuarioValue = txtUsuario.getText().trim();
+        String txtSenhaValue = new String(txtSenha.getPassword());
+
+        if (txtUsuarioValue.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor informe o usuário.", "Atenção", JOptionPane.WARNING_MESSAGE);
+            txtUsuario.requestFocus();
+            return;
+        } else if (txtSenhaValue.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor informe a senha.", "Atenção", JOptionPane.WARNING_MESSAGE);
+            txtSenha.requestFocus();
+            return;
+        }
+
+        Usuario usuarioEditado = new Usuario();
+        usuarioEditado.setUsuario(txtUsuarioValue);
+        usuarioEditado.setSenha(txtSenhaValue);
+        usuarioEditado.setPerfil(String.valueOf(cmbPerfil.getSelectedItem()));
+
+        if (isEdicao) {
+            if (controller.atualizarUsuario(usuario, usuarioEditado)) {
+                JOptionPane.showMessageDialog(null, "Usuário atualizado com sucesso.", "Atenção", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+        if (!controller.verificarUsuarioExiste(txtUsuarioValue)) {
+            controller.inserirUsuario(usuarioEditado);
+            JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso.", "Atenção", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar usuário.", "Atenção", JOptionPane.ERROR_MESSAGE);
+        }
+
+        this.dispose();
     }//GEN-LAST:event_jButtonGravarActionPerformed
 
 

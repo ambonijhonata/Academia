@@ -4,6 +4,7 @@
  */
 package com.estruturadados.academia.database.dao;
 
+import com.estruturadados.academia.database.ConnectionFactory;
 import com.estruturadados.academia.database.model.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,29 +19,33 @@ import java.util.List;
  */
 public class UsuarioDAO extends SistemaDAO {
 
-    private final Connection connection;
-    private final String select = "SELECT * FROM public.usuarios";
-    private final String insert = "INSERT INTO public.usuarios (usuario, senha, perfil) VALUES (?, ?, ?)";
-    private final String delete = "DELETE FROM public.usuarios WHERE usuario = ? AND senha = ?";    
-    private final String update = "UPDATE public.usuarios SET usuario = ?, senha = ?, perfil = ? WHERE usuario = ? AND senha = ?";
-    
+    private Connection connection;
+    private String select = "SELECT * FROM public.usuarios";
+    private String selectComClasula = "SELECT * FROM public.usuarios WHERE USUARIO = ?";
+    private String insert = "INSERT INTO public.usuarios (usuario, senha, perfil) VALUES (?, ?, ?)";
+    private String delete = "DELETE FROM public.usuarios WHERE usuario = ?";
+    private String update = "UPDATE public.usuarios SET usuario = ?, senha = ?, perfil = ? WHERE usuario = ?";
+
+
     private PreparedStatement psSelect;
+    private PreparedStatement psSelectClasula;
     private PreparedStatement psInsert;
     private PreparedStatement psDelete;
     private PreparedStatement psUpdate;
 
     public UsuarioDAO(Connection connection) throws SQLException {
         this.connection = connection;
-        psSelect = this.connection.prepareStatement(select);    
+        psSelect = this.connection.prepareStatement(select);
+        psSelectClasula = this.connection.prepareStatement(selectComClasula);
         psInsert = this.connection.prepareStatement(insert);
         psDelete = this.connection.prepareStatement(delete);
         psUpdate = this.connection.prepareStatement(update);
     }
 
     @Override
-    public List<Object> Select() throws SQLException {
+    public List<Usuario> Select() throws SQLException {
         ResultSet rs = psSelect.executeQuery();
-        List<Object> usuarios = new ArrayList<Object>();
+        List<Usuario> usuarios = new ArrayList<>();
 
         while (rs.next()) {
             Usuario u = new Usuario();
@@ -54,28 +59,44 @@ public class UsuarioDAO extends SistemaDAO {
     }
 
     @Override
+    public Usuario SelectWithCondition(Object usuarioBuscar) throws SQLException {
+        psSelectClasula.setString(1, usuarioBuscar.toString());
+        
+        ResultSet rs = psSelectClasula.executeQuery();
+        Usuario usuario = null;
+        
+        while (rs.next()) {
+            usuario = new Usuario();
+            usuario.setUsuario(rs.getString("usuario"));
+            usuario.setSenha(rs.getString("senha"));
+            usuario.setPerfil(rs.getString("perfil"));
+
+        }
+        return usuario;
+    }
+
+    @Override
     public int Insert(Object param) throws SQLException {
         Usuario usuario = (Usuario) param;
-        
+
         psInsert.setString(1, usuario.getUsuario());
         psInsert.setString(2, usuario.getSenha());
         psInsert.setString(3, usuario.getPerfil());
-        
+
         psInsert.execute();
-        
+
         return psInsert.getUpdateCount(); //retorna o numero de linhas afetadas
     }
 
     @Override
     public long Delete(Object param) {
         try {
-            Usuario usuario = (Usuario) param;
-            
-            psDelete.setString(1, usuario.getUsuario());
-            psDelete.setString(2, usuario.getSenha());
-            
+            String usuario = (String) param;
+
+            psDelete.setString(1, usuario);
+
             psDelete.execute();
-            
+
             return psDelete.getUpdateCount();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -84,22 +105,22 @@ public class UsuarioDAO extends SistemaDAO {
     }
 
     @Override
-    public long Update(Object param) {
+    public long Update(Object usuarioAntigo, Object usuarioNovo) {
         try {
-            Usuario usuario = (Usuario) param;
-            
-            psUpdate.setString(1, usuario.getUsuario());
-            psUpdate.setString(2, usuario.getSenha());
-            psUpdate.setString(3, usuario.getPerfil());
-            psUpdate.setString(4, usuario.getUsuario());
-            psUpdate.setString(5, usuario.getSenha());
-            
+            Usuario uAntigo = (Usuario) usuarioAntigo;
+            Usuario uNovo = (Usuario) usuarioNovo;
+
+            psUpdate.setString(1, uNovo.getUsuario());
+            psUpdate.setString(2, uNovo.getSenha());
+            psUpdate.setString(3, uNovo.getPerfil());
+            psUpdate.setString(4, uAntigo.getUsuario());
+
             psUpdate.execute();
-            
-            return psUpdate.getUpdateCount();            
+
+            return psUpdate.getUpdateCount();
         } catch (SQLException ex) {
             ex.printStackTrace();
-        }        
+        }
         return 0;
-    }        
+    }
 }

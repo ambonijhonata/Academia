@@ -1,12 +1,13 @@
 package com.estruturadados.academia.database.model;
 
 public class Usuario {
+
     private String usuario;
     private String senha;
     private String perfil;
 
     public Usuario() {
-        
+
     }
 
     public Usuario(String usuario, String senha, String perfil) {
@@ -22,15 +23,15 @@ public class Usuario {
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
-    
-    public String getSenha(){
+
+    public String getSenha() {
         return senha;
     }
-    
-    public void setSenha(String senha){
+
+    public void setSenha(String senha) {
         this.senha = senha;
     }
-    
+
     public String getPerfil() {
         return perfil;
     }
@@ -41,8 +42,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "usuario=" + usuario + ", senha=" + senha + ", perfil=" + perfil + "";
+        return "Usuário: " + usuario + " senha: " + senha + " perfil: " + perfil; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
+
 }
-
-

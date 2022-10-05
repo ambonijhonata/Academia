@@ -4,10 +4,15 @@
  */
 package com.estruturadados.academia.ghrapic;
 
+import com.estruturadados.academia.database.ConnectionFactory;
 import com.estruturadados.academia.util.UtilsFormularios;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,9 +24,12 @@ public class MainView extends javax.swing.JFrame {
     /**
      * Creates new form MainView
      */
+    private Connection connection;
+
     public MainView() {
         initComponents();
         definirTeclasAtalho();
+        conectarBanco();
     }
 
     private void definirTeclasAtalho() {
@@ -41,6 +49,14 @@ public class MainView extends javax.swing.JFrame {
         //grupo de menu financeiro
         jMenuFinanceiro.setMnemonic(KeyEvent.VK_F);
         jMenuItemMatricula.setMnemonic(KeyEvent.VK_M);
+    }
+
+    public void conectarBanco() {
+        try {
+            this.connection = ConnectionFactory.getConnection("localhost", "5432", "public", "postgres", "mananger");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     /**
@@ -174,8 +190,8 @@ public class MainView extends javax.swing.JFrame {
 
     private void jMenuItemUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUsuariosActionPerformed
         // TODO add your handling code here:
-        ListagemUsuariosView tela = new ListagemUsuariosView();        
-        jDesktopPanelTelaPrincipal.add(tela);               
+        ListagemUsuariosView tela = new ListagemUsuariosView(connection);
+        jDesktopPanelTelaPrincipal.add(tela);
         tela.setVisible(true);
     }//GEN-LAST:event_jMenuItemUsuariosActionPerformed
 
@@ -196,9 +212,9 @@ public class MainView extends javax.swing.JFrame {
     private void jMenuItemCidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCidadesActionPerformed
 
         ListaCidadesView listaCidadesView = new ListaCidadesView();
-        
+
         this.jDesktopPanelTelaPrincipal.add(listaCidadesView);
-        
+
         listaCidadesView.setVisible(true);
     }//GEN-LAST:event_jMenuItemCidadesActionPerformed
 

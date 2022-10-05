@@ -1,6 +1,7 @@
 package com.estruturadados.academia.database.dao;
 
 import com.estruturadados.academia.database.model.Matricula;
+import com.estruturadados.academia.database.model.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -75,8 +76,13 @@ public class MatriculaDAO extends SistemaDAO {
         return 0;
     }
 
-    public long Update(Object param) {
-        
-        return 0;
+    @Override
+    public Usuario SelectWithCondition(Object usuarioBuscar) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public long Update(Object param, Object param2) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

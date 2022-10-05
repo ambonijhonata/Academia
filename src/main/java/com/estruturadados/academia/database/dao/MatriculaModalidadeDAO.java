@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.estruturadados.academia.database.model.MatriculasModalidades;
+import com.estruturadados.academia.database.model.Usuario;
 
 public class MatriculaModalidadeDAO extends SistemaDAO{
     
@@ -77,7 +78,7 @@ public class MatriculaModalidadeDAO extends SistemaDAO{
     }
 
     @Override
-    public long Update(Object param) {
+    public long Update(Object param, Object param2) {
         MatriculasModalidades mm = (MatriculasModalidades) param;
         try{
             pstUpdate.setTimestamp(6, new Timestamp(mm.getDataFim().getTime()));
@@ -87,4 +88,10 @@ public class MatriculaModalidadeDAO extends SistemaDAO{
         }
         return 0;
     }
+
+    @Override
+    public Usuario SelectWithCondition(Object usuarioBuscar) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }

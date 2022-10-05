@@ -13,14 +13,13 @@ public class AlunoDAO extends SistemaDAO {
 
     private Connection conexao;
     private String select = "select * from public.alunos;";
-    private String insert = "INSERT INTO public.alunos " +
-            "(aluno,data_nascimento,sexo,telefone,celular,email,observacao,endereco,numero,complemento,bairro,cidade,estado,pais,cep) "
-            +
-            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
-    private String update = "UPDATE public.alunos " +
-            "SET aluno=?, data_nascimento=?, sexo=?, telefone=?, celular=?, email=?, observacao=?, endereco=?, numero=?, complemento=?, bairro=?, cidade=?, estado=?, pais=?, cep=? "
-            +
-            "WHERE codigo_aluno=?;";
+
+    private String insert = "INSERT INTO public.alunos "
+            + "(aluno,data_nascimento,sexo,telefone,celular,email,observacao,endereco,numero,complemento,bairro,cidade,estado,pais,cep) "
+            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    private String update = "UPDATE public.alunos "
+            + "SET aluno=?, data_nascimento=?, sexo=?, telefone=?, celular=?, email=?, observacao=?, endereco=?, numero=?, complemento=?, bairro=?, cidade=?, estado=?, pais=?, cep=? "
+            + "WHERE codigo_aluno=?;";
     private String delete = "DELETE FROM public.alunos WHERE codigo_aluno=?;";
 
     private PreparedStatement pstSelect;
@@ -103,8 +102,7 @@ public class AlunoDAO extends SistemaDAO {
         return 0;
     }
 
-    @Override
-    public long Update(Object param) {
+    public long Update(Object param, Object param2) {
         Aluno p = (Aluno) param;
         try {
             pstUpdate.setString(1, p.getAluno());
@@ -129,5 +127,10 @@ public class AlunoDAO extends SistemaDAO {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    @Override
+    public Object SelectWithCondition(Object param) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.estruturadados.academia.database.model.Cidade;
+import com.estruturadados.academia.database.model.Usuario;
 
 // Só vai select e delete
 public class CidadeDAO extends SistemaDAO {
@@ -61,7 +62,12 @@ public class CidadeDAO extends SistemaDAO {
     }
 
     @Override
-	public long Update(Object param){
-        return 0;
+    public Usuario SelectWithCondition(Object usuarioBuscar) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public long Update(Object param, Object param2) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

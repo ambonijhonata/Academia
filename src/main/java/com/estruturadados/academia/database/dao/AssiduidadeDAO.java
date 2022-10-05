@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.estruturadados.academia.database.model.Assiduidade;
+import com.estruturadados.academia.database.model.Usuario;
 
 // Só vai select, insert e delete
 public class AssiduidadeDAO extends SistemaDAO{
@@ -65,10 +66,15 @@ public class AssiduidadeDAO extends SistemaDAO{
         }
         return arlAssiduidade;
     }
+
     @Override
-    public long Update(Object param) {
-        // TODO Auto-generated method stub
-        return 0;
+    public Usuario SelectWithCondition(Object param) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public long Update(Object param, Object param2) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

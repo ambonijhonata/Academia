@@ -5,8 +5,12 @@
  */
 package com.estruturadados.academia.ghrapic;
 
+import com.estruturadados.academia.controler.ListagemUsuariosViewController;
 import com.estruturadados.academia.database.model.Usuario;
 import java.awt.event.KeyEvent;
+import java.sql.Connection;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,16 +21,24 @@ public class ListagemUsuariosView extends javax.swing.JInternalFrame {
     /**
      * Creates new form ListagemUsuariosView
      */
-    public ListagemUsuariosView() {
+    private Connection connection;
+    private ListagemUsuariosViewController controller;
+
+    public ListagemUsuariosView(Connection connection) {
         initComponents();
         definirTeclasAtalho();
+        this.connection = connection;
+        controller = new ListagemUsuariosViewController(connection);
     }
-    
-    private void definirTeclasAtalho(){
+
+    private void definirTeclasAtalho() {
+        jButtonListar.setMnemonic(KeyEvent.VK_L);
         jButtonCadastrar.setMnemonic(KeyEvent.VK_C);
-        jButtonEditar.setMnemonic(KeyEvent.VK_E);        
+        jButtonEditar.setMnemonic(KeyEvent.VK_E);
+        jButtonExcluir.setMnemonic(KeyEvent.VK_X);
+        
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,9 +54,38 @@ public class ListagemUsuariosView extends javax.swing.JInternalFrame {
         jTableListagemUsuarios = new javax.swing.JTable();
         jButtonCadastrar = new javax.swing.JButton();
         jButtonEditar = new javax.swing.JButton();
+        jButtonListar = new javax.swing.JButton();
+        jButtonExcluir = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Usuários");
+        addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                formFocusGained(evt);
+            }
+        });
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameActivated(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
 
         jPanelTelaListagemUsuarios.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -86,6 +127,20 @@ public class ListagemUsuariosView extends javax.swing.JInternalFrame {
             }
         });
 
+        jButtonListar.setText("Listar");
+        jButtonListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonListarActionPerformed(evt);
+            }
+        });
+
+        jButtonExcluir.setText("Excluir");
+        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelTelaListagemUsuariosLayout = new javax.swing.GroupLayout(jPanelTelaListagemUsuarios);
         jPanelTelaListagemUsuarios.setLayout(jPanelTelaListagemUsuariosLayout);
         jPanelTelaListagemUsuariosLayout.setHorizontalGroup(
@@ -99,9 +154,14 @@ public class ListagemUsuariosView extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 548, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTelaListagemUsuariosLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonListar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonCadastrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonEditar)))
+                        .addComponent(jButtonEditar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonExcluir)
+                        .addGap(1, 1, 1)))
                 .addContainerGap())
         );
         jPanelTelaListagemUsuariosLayout.setVerticalGroup(
@@ -110,12 +170,14 @@ public class ListagemUsuariosView extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(lblUsuarios)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanelTelaListagemUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonEditar)
-                    .addComponent(jButtonCadastrar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonCadastrar)
+                    .addComponent(jButtonListar)
+                    .addComponent(jButtonExcluir))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -132,31 +194,72 @@ public class ListagemUsuariosView extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanelTelaListagemUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
-        // TODO add your handling code here:        
-        Usuario usuarioObj = new Usuario();
-        String usuarioValorTable = String.valueOf(jTableListagemUsuarios.getValueAt(jTableListagemUsuarios.getSelectedRow(), 0));
-        usuarioObj.setUsuario(usuarioValorTable);
-        CadastrarUsuarioView tela = new CadastrarUsuarioView(usuarioObj);
+        // TODO add your handling code here:
+        if (jTableListagemUsuarios.getSelectedRow() != -1) {
+            String usuarioValorTable = String.valueOf(jTableListagemUsuarios.getValueAt(jTableListagemUsuarios.getSelectedRow(), 0));
+            
+            Usuario usuario = controller.buscarUsuarioByUsuario(usuarioValorTable);
+            
+            CadastrarUsuarioView tela = new CadastrarUsuarioView(connection, usuario);
+            this.getParent().add(tela);
+            tela.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "Por favor selecione um usuário.", "Atenção", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
         // TODO add your handling code here:
-        CadastrarUsuarioView tela = new CadastrarUsuarioView(null);
+        CadastrarUsuarioView tela = new CadastrarUsuarioView(connection, null);
         this.getParent().add(tela);
         tela.setVisible(true);
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
+
+    private void jButtonListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarActionPerformed
+        controller.listarUsuarios((DefaultTableModel) jTableListagemUsuarios.getModel());
+    }//GEN-LAST:event_jButtonListarActionPerformed
+
+    private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_formFocusGained
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formMouseClicked
+
+    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
+        // TODO add your handling code here:
+        controller.listarUsuarios((DefaultTableModel) jTableListagemUsuarios.getModel());
+    }//GEN-LAST:event_formInternalFrameActivated
+
+    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
+        // TODO add your handling code here:
+        if(jTableListagemUsuarios.getSelectedRow() != -1){
+            String chavePrimariaUsuario = String.valueOf(jTableListagemUsuarios.getValueAt(jTableListagemUsuarios.getSelectedRow(), 0));
+            
+            if(controller.deletarUsuario(chavePrimariaUsuario)){
+                JOptionPane.showMessageDialog(null, "Usuário excluído com sucesso.", "Atenção", JOptionPane.WARNING_MESSAGE);
+                controller.listarUsuarios((DefaultTableModel) jTableListagemUsuarios.getModel());
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Por favor selecione um usuário.", "Atenção", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonExcluirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCadastrar;
     private javax.swing.JButton jButtonEditar;
+    private javax.swing.JButton jButtonExcluir;
+    private javax.swing.JButton jButtonListar;
     private javax.swing.JPanel jPanelTelaListagemUsuarios;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableListagemUsuarios;
