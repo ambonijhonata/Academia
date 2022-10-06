@@ -19,13 +19,10 @@ public class CadastrarUsuarioView extends javax.swing.JInternalFrame {
     /**
      * Creates new form CadastrarUsuarioView
      */
-    private Connection connection;
+    private final Connection connection;
     private CadastrarUsuarioViewController controller;
     private Usuario usuario;
     private boolean isEdicao = false;
-
-    //esse trabalho foi desenvolvido a partir de um banco de dados pronto ofertado pelo professor.
-    //por motivo nenhum(Não foi explicado mesmo quando solicitado), foi usado chave composta e também chaves como String nas tabelas, não sendo possível fazer
     private String chaveTabela;
 
     public CadastrarUsuarioView(Connection connection, Usuario usuario) {

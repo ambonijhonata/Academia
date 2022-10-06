@@ -2,7 +2,9 @@ package com.estruturadados.academia.database;
 
 import com.estruturadados.academia.database.dao.AlunoDAO;
 import com.estruturadados.academia.database.dao.CidadeDAO;
+import com.estruturadados.academia.database.dao.UsuarioDAO;
 import com.estruturadados.academia.database.model.Aluno;
+import com.estruturadados.academia.database.model.Usuario;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -13,9 +15,9 @@ public class Teste {
         Connection connection = ConnectionFactory.getConnection(
                 "localhost",
                 "5432",
-                "academia",
+                "public",
                 "postgres",
-                "postgres"
+                "mananger"
         );
         if (connection != null) {
             System.out.println("CONECTADO");
@@ -24,7 +26,16 @@ public class Teste {
             CidadeDAO cidadeDAO = new CidadeDAO(connection);
 
             List<Object> listaAluno = alunoDAO.Select();
-
+            
+            
+            
+            Usuario usuario = new Usuario("psico", "pata", "psicopata");
+            
+            UsuarioDAO usuarioDAO = new UsuarioDAO(connection);
+            usuarioDAO.selectLogin(usuario);
+            
+            System.out.println("stop");
+            
             for (Object o : listaAluno) {
                 System.out.println(((Aluno) o).toString());
             }

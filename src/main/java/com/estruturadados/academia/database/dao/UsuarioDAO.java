@@ -4,7 +4,6 @@
  */
 package com.estruturadados.academia.database.dao;
 
-import com.estruturadados.academia.database.ConnectionFactory;
 import com.estruturadados.academia.database.model.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,16 +18,17 @@ import java.util.List;
  */
 public class UsuarioDAO extends SistemaDAO {
 
-    private Connection connection;
-    private String select = "SELECT * FROM public.usuarios";
-    private String selectComClasula = "SELECT * FROM public.usuarios WHERE USUARIO = ?";
-    private String insert = "INSERT INTO public.usuarios (usuario, senha, perfil) VALUES (?, ?, ?)";
-    private String delete = "DELETE FROM public.usuarios WHERE usuario = ?";
-    private String update = "UPDATE public.usuarios SET usuario = ?, senha = ?, perfil = ? WHERE usuario = ?";
-
+    private final Connection connection;
+    private final String select = "SELECT * FROM public.usuarios";
+    private final String selectComClasula = "SELECT * FROM public.usuarios WHERE USUARIO = ?";
+    private final String selectLogin = "SELECT * FROM public.usuarios WHERE usuario = ? AND senha = ?";
+    private final String insert = "INSERT INTO public.usuarios (usuario, senha, perfil) VALUES (?, ?, ?)";
+    private final String delete = "DELETE FROM public.usuarios WHERE usuario = ?";
+    private final String update = "UPDATE public.usuarios SET usuario = ?, senha = ?, perfil = ? WHERE usuario = ?";
 
     private PreparedStatement psSelect;
     private PreparedStatement psSelectClasula;
+    private PreparedStatement psSelectLogin;
     private PreparedStatement psInsert;
     private PreparedStatement psDelete;
     private PreparedStatement psUpdate;
@@ -37,9 +37,28 @@ public class UsuarioDAO extends SistemaDAO {
         this.connection = connection;
         psSelect = this.connection.prepareStatement(select);
         psSelectClasula = this.connection.prepareStatement(selectComClasula);
+        psSelectLogin = this.connection.prepareStatement(selectLogin);
         psInsert = this.connection.prepareStatement(insert);
         psDelete = this.connection.prepareStatement(delete);
         psUpdate = this.connection.prepareStatement(update);
+    }
+
+    public boolean selectLogin(Usuario usuario) throws SQLException {
+        psSelectLogin.setString(1, usuario.getUsuario());
+        psSelectLogin.setString(2, usuario.getSenha());
+        ResultSet rs = psSelectLogin.executeQuery();
+
+        if (rs.next()) {
+            usuario.setUsuario(rs.getString("usuario"));
+            usuario.setSenha(rs.getString("senha"));
+            usuario.setPerfil(rs.getString("perfil"));
+            return true;
+        }else{
+            usuario.setUsuario(null);
+            usuario.setSenha(null);
+        }                
+        
+        return false;
     }
 
     @Override
@@ -61,10 +80,10 @@ public class UsuarioDAO extends SistemaDAO {
     @Override
     public Usuario SelectWithCondition(Object usuarioBuscar) throws SQLException {
         psSelectClasula.setString(1, usuarioBuscar.toString());
-        
+
         ResultSet rs = psSelectClasula.executeQuery();
         Usuario usuario = null;
-        
+
         while (rs.next()) {
             usuario = new Usuario();
             usuario.setUsuario(rs.getString("usuario"));

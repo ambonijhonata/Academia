@@ -24,6 +24,7 @@ C:\a\Academia\src\main\java\com\estruturadados\academia\controler\CadastrarUsuar
 C:\a\Academia\src\main\java\com\estruturadados\academia\ghrapic\ListagemUsuarios.java
 C:\a\Academia\src\main\java\com\estruturadados\academia\database\dao\UsuarioDAO.java
 C:\a\Academia\src\main\java\com\estruturadados\academia\database\model\Graduacao.java
+C:\a\Academia\src\main\java\com\estruturadados\academia\ghrapic\LoginView.java
 C:\a\Academia\src\main\java\com\estruturadados\academia\database\model\Usuario.java
 C:\a\Academia\src\main\java\com\estruturadados\academia\database\dao\ModalidadeDAO.java
 C:\a\Academia\src\main\java\com\estruturadados\academia\database\dao\SistemaDAO.java
@@ -34,3 +35,4 @@ C:\a\Academia\src\main\java\com\estruturadados\academia\database\model\FaturasMa
 C:\a\Academia\src\main\java\com\estruturadados\academia\database\Teste.java
 C:\a\Academia\src\main\java\com\estruturadados\academia\controler\ListagemUsuariosViewController.java
 C:\a\Academia\src\main\java\com\estruturadados\academia\database\model\Aluno.java
+C:\a\Academia\src\main\java\com\estruturadados\academia\controler\LoginViewController.java

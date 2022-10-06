@@ -5,14 +5,12 @@
 package com.estruturadados.academia.ghrapic;
 
 import com.estruturadados.academia.database.ConnectionFactory;
-import com.estruturadados.academia.util.UtilsFormularios;
+import com.estruturadados.academia.database.model.Usuario;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,13 +23,22 @@ public class MainView extends javax.swing.JFrame {
      * Creates new form MainView
      */
     private Connection connection;
-
+    //APARTIR DO PERFIL DESSE CARA FAZER AS LIBERAÇÕES DE MENU DE ACOROD COM O QUE O PROFESSOR PASSOU
+    private Usuario usuario;
+    
     public MainView() {
         initComponents();
         definirTeclasAtalho();
+        usuario = new Usuario();
         conectarBanco();
     }
 
+    public void preencherUsuario(Usuario usuario){        
+        this.usuario.setUsuario(usuario.getUsuario());
+        this.usuario.setSenha(usuario.getSenha());
+        this.usuario.setPerfil(usuario.getPerfil());
+    }
+    
     private void definirTeclasAtalho() {
         //grupo de menu Sistema    
         jMenuSistema.setMnemonic(KeyEvent.VK_M);
@@ -53,7 +60,7 @@ public class MainView extends javax.swing.JFrame {
 
     public void conectarBanco() {
         try {
-            this.connection = ConnectionFactory.getConnection("localhost", "5432", "public", "postgres", "mananger");
+            connection = ConnectionFactory.getConnection("localhost", "5432", "public", "postgres", "mananger");
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

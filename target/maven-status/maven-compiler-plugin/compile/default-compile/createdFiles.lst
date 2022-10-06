@@ -1,4 +1,5 @@
 com\estruturadados\academia\database\model\Matricula.class
+com\estruturadados\academia\ghrapic\LoginView.class
 com\estruturadados\academia\controler\CadastrarUsuarioViewController.class
 com\estruturadados\academia\ghrapic\ListagemUsuariosView$5.class
 com\estruturadados\academia\ghrapic\MainView$6.class
@@ -12,6 +13,7 @@ com\estruturadados\academia\database\dao\MatriculaModalidadeDAO.class
 com\estruturadados\academia\ghrapic\MainView.class
 com\estruturadados\academia\database\dao\AssiduidadeDAO.class
 com\estruturadados\academia\database\model\Plano.class
+com\estruturadados\academia\ghrapic\LoginView$1.class
 com\estruturadados\academia\ghrapic\ListagemUsuariosView$8.class
 com\estruturadados\academia\ghrapic\MainView$3.class
 com\estruturadados\academia\database\model\Graduacao.class
@@ -22,6 +24,8 @@ com\estruturadados\academia\database\dao\SistemaDAO.class
 com\estruturadados\academia\ghrapic\ListagemUsuariosView$6.class
 com\estruturadados\academia\database\dao\UsuarioDAO.class
 com\estruturadados\academia\ghrapic\ListaCidadesView$2.class
+com\estruturadados\academia\controler\LoginViewController.class
+com\estruturadados\academia\ghrapic\LoginView$2.class
 com\estruturadados\academia\ghrapic\CadastroGraduacao$1.class
 com\estruturadados\academia\ghrapic\CadastroModalidade$2.class
 com\estruturadados\academia\ghrapic\ListagemUsuarios.class
@@ -29,6 +33,7 @@ com\estruturadados\academia\ghrapic\MainView$1.class
 com\estruturadados\academia\ghrapic\MainView$4.class
 com\estruturadados\academia\ghrapic\ListagemUsuariosView$2.class
 com\estruturadados\academia\ghrapic\TextFieldDocument.class
+com\estruturadados\academia\ghrapic\LoginView$3.class
 com\estruturadados\academia\controler\ListagemUsuariosViewController.class
 com\estruturadados\academia\ghrapic\CadastroCidadesView.class
 com\estruturadados\academia\ghrapic\CadastroAluno$1.class
