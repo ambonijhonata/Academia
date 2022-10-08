@@ -25,7 +25,7 @@ public class LoginView extends javax.swing.JFrame {
     private LoginViewController controller;
 
     public LoginView() {
-        initComponents();              
+        initComponents();
         conectarBanco();
         controller = new LoginViewController(connection);
     }
@@ -81,8 +81,6 @@ public class LoginView extends javax.swing.JFrame {
                 btnEntrarActionPerformed(evt);
             }
         });
-
-        jPasswordFieldSenha.setText("jPasswordField1");
 
         javax.swing.GroupLayout jPanelPrincipalLayout = new javax.swing.GroupLayout(jPanelPrincipal);
         jPanelPrincipal.setLayout(jPanelPrincipalLayout);
@@ -156,8 +154,7 @@ public class LoginView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        // TODO add your handling code here:
-        Usuario usuario = new Usuario();
+        // TODO add your handling code here:        
         String usuarioTexto = jTextFieldUsuario.getText();
         String senhaTexto = new String(jPasswordFieldSenha.getPassword());
 
@@ -168,22 +165,22 @@ public class LoginView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Por favor informe a senha.", "Atenção", JOptionPane.WARNING_MESSAGE);
             return;
         }
-
+        Usuario usuario = new Usuario();
         usuario.setUsuario(usuarioTexto);
         usuario.setSenha(senhaTexto);
-        
-        if(controller.fazerLogin(usuario)){
-            JOptionPane.showMessageDialog(null, "Login realizado com sucesso.", "Login", JOptionPane.INFORMATION_MESSAGE);
+
+        if (!controller.fazerLogin(usuario)) {
+            JOptionPane.showMessageDialog(null, "Não foi possível realizar o login.", "Login", JOptionPane.ERROR_MESSAGE);
+            
+            return;
+        } else {
             MainView mainView = new MainView();
             mainView.preencherUsuario(usuario);
+            JOptionPane.showMessageDialog(null, "Login realizado com sucesso.", "Login", JOptionPane.INFORMATION_MESSAGE);
             mainView.setVisible(true);
-            this.dispose();
-            return;        
-        }else{
-            JOptionPane.showMessageDialog(null, "Não foi possível realizar o login.", "Login", JOptionPane.ERROR_MESSAGE);
-            return;
+            this.dispose();                                    
         }
-        
+
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     /**

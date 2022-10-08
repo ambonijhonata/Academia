@@ -23,12 +23,9 @@ public class LoginViewController {
 
     public boolean fazerLogin(Usuario usuario) {
         try {
-            UsuarioDAO usuarioDAO = new UsuarioDAO(connection);
-            usuarioDAO.selectLogin(usuario);
+            UsuarioDAO usuarioDAO = new UsuarioDAO(connection);            
 
-            boolean isRetorno = usuario.getUsuario() != null && usuario.getSenha() != null;
-
-            return isRetorno;
+            return usuarioDAO.selectLogin(usuario);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

@@ -30,13 +30,24 @@ public class MainView extends javax.swing.JFrame {
         initComponents();
         definirTeclasAtalho();
         usuario = new Usuario();
-        conectarBanco();
+        conectarBanco();        
     }
 
     public void preencherUsuario(Usuario usuario){        
         this.usuario.setUsuario(usuario.getUsuario());
         this.usuario.setSenha(usuario.getSenha());
         this.usuario.setPerfil(usuario.getPerfil());
+        
+        //define menus
+        switch(this.usuario.getPerfil()){
+            case "CADASTRAL" :
+                jMenuFinanceiro.setVisible(false);                
+                break;
+            case "FINANCEIRO" :
+                jMenuItemUsuarios.setVisible(false);
+                jMenuCadastro.setVisible(false);
+                break;
+        }
     }
     
     private void definirTeclasAtalho() {
@@ -65,7 +76,19 @@ public class MainView extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }
-
+    
+    private void defineMenusPerfilAdministrador(){
+        
+    }
+    
+    private void defineMenusPerfilCadastral(){
+        
+    }
+    
+    private void defineMenusPerfilFinanceiro(){
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -196,7 +219,7 @@ public class MainView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUsuariosActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:        
         ListagemUsuariosView tela = new ListagemUsuariosView(connection);
         jDesktopPanelTelaPrincipal.add(tela);
         tela.setVisible(true);
