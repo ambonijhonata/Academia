@@ -23,12 +23,13 @@ com\estruturadados\academia\ghrapic\CadastroModalidade$3.class
 com\estruturadados\academia\database\dao\SistemaDAO.class
 com\estruturadados\academia\ghrapic\ListagemUsuariosView$6.class
 com\estruturadados\academia\database\dao\UsuarioDAO.class
+com\estruturadados\academia\ghrapic\ListagemAlunosView.class
 com\estruturadados\academia\ghrapic\ListaCidadesView$2.class
 com\estruturadados\academia\controler\LoginViewController.class
 com\estruturadados\academia\ghrapic\LoginView$2.class
+com\estruturadados\academia\controler\ListagemAlunosVireController.class
 com\estruturadados\academia\ghrapic\CadastroGraduacao$1.class
 com\estruturadados\academia\ghrapic\CadastroModalidade$2.class
-com\estruturadados\academia\ghrapic\ListagemUsuarios.class
 com\estruturadados\academia\ghrapic\MainView$1.class
 com\estruturadados\academia\ghrapic\MainView$4.class
 com\estruturadados\academia\ghrapic\ListagemUsuariosView$2.class

@@ -23,19 +23,17 @@ public class ListagemUsuariosViewController {
         this.connection = connection;
     }
 
-    public void listarUsuarios(DefaultTableModel modeloTabela) {
-        DefaultTableModel tabela = modeloTabela;
-
+    public void listarUsuarios(DefaultTableModel modeloTabela) {        
         try {
             UsuarioDAO usuarioDAO = new UsuarioDAO(connection);
             List<Usuario> listaUsuarios = usuarioDAO.Select();
 
             if (listaUsuarios != null) {
-                tabela.setRowCount(0);
+                modeloTabela.setRowCount(0);
 
                 for (Usuario u : listaUsuarios) {
                     Object[] dados = {u.getUsuario(), u.getPerfil()};
-                    tabela.addRow(dados);
+                    modeloTabela.addRow(dados);
                 }
             }
         } catch (SQLException ex) {
