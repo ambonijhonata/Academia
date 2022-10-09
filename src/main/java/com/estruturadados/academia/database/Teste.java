@@ -25,7 +25,7 @@ public class Teste {
             AlunoDAO alunoDAO = new AlunoDAO(connection);
             CidadeDAO cidadeDAO = new CidadeDAO(connection);
 
-            List<Object> listaAluno = alunoDAO.Select();
+            List<Aluno> listaAluno = alunoDAO.Select();
             
             
             

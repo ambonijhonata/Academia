@@ -190,37 +190,38 @@ public class Aluno {
 
     @Override
     public String toString() {
-        return ("Codigo Aluno: " +
-                this.codigoAluno +
-                ", Aluno: " +
-                this.aluno +
-                ", Data Nascimento: " +
-                this.dataNascimento +
-                ", Sexo: " +
-                this.sexo +
-                ", Telefone: " +
-                this.telefone +
-                ", Celular: " +
-                this.celular +
-                ", E-mail: " +
-                this.email +
-                ", Observação: " +
-                this.observacao +
-                ", Endereço: " +
-                this.endereco +
-                ", Número: " +
-                this.numero +
-                ", Complemento: " +
-                this.complemento +
-                ", Bairro: " +
-                this.bairro +
-                ", Cidade: " +
-                this.cidade +
-                ", Estado: " +
-                this.estado +
-                ", País: " +
-                this.pais +
-                ", CEP: " +
-                this.cep);
+        return ("Codigo Aluno: "
+                + this.codigoAluno
+                + ", Aluno: "
+                + this.aluno
+                + ", Data Nascimento: "
+                + this.dataNascimento
+                + ", Sexo: "
+                + this.sexo
+                + ", Telefone: "
+                + this.telefone
+                + ", Celular: "
+                + this.celular
+                + ", E-mail: "
+                + this.email
+                + ", Observação: "
+                + this.observacao
+                + ", Endereço: "
+                + this.endereco
+                + ", Número: "
+                + this.numero
+                + ", Complemento: "
+                + this.complemento
+                + ", Bairro: "
+                + this.bairro
+                + ", Cidade: "
+                + this.cidade
+                + ", Estado: "
+                + this.estado
+                + ", País: "
+                + this.pais
+                + ", CEP: "
+                + this.cep);
     }
+
 }

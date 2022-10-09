@@ -36,9 +36,9 @@ public class AlunoDAO extends SistemaDAO {
     }
 
     @Override
-    public List<Object> Select() throws SQLException {
+    public List<Aluno> Select() throws SQLException {
         ResultSet resultado = pstSelect.executeQuery();
-        List<Object> arlPessoa = new ArrayList<Object>();
+        List<Aluno> arlPessoa = new ArrayList<>();
 
         while (resultado.next()) {
             Aluno p = new Aluno();
