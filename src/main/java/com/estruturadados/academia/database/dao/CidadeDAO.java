@@ -27,10 +27,10 @@ public class CidadeDAO extends SistemaDAO {
     }
 
     @Override
-	public List<Object> Select() throws SQLException {
+	public List<Cidade> Select() throws SQLException {
         
         ResultSet resultado = pstSelect.executeQuery();		
-        List<Object> arlCidade = new ArrayList<Object>();
+        List<Cidade> arlCidade = new ArrayList<Cidade>();
         
         while (resultado.next()) {
             

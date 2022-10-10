@@ -8,7 +8,7 @@ public class Aluno {
     private int codigoAluno;
     private String aluno;
     private Date dataNascimento;
-    private String sexo;
+    private char sexo;
     private String telefone;
     private String celular;
     private String email;
@@ -17,9 +17,7 @@ public class Aluno {
     private String numero;
     private String complemento;
     private String bairro;
-    private String cidade;
-    private String estado;
-    private String pais;
+    private Cidade cidade;
     private String cep;
 
     public Aluno() {
@@ -29,7 +27,7 @@ public class Aluno {
             int codigo_aluno,
             String aluno,
             Date data_nascimento,
-            String sexo,
+            char sexo,
             String telefone,
             String celular,
             String email,
@@ -38,9 +36,7 @@ public class Aluno {
             String numero,
             String complemento,
             String bairro,
-            String cidade,
-            String estado,
-            String pais,
+            Cidade cidade,
             String cep) {
         this.codigoAluno = codigo_aluno;
         this.aluno = aluno;
@@ -55,8 +51,6 @@ public class Aluno {
         this.complemento = complemento;
         this.bairro = bairro;
         this.cidade = cidade;
-        this.estado = estado;
-        this.pais = pais;
         this.cep = cep;
     }
 
@@ -84,11 +78,11 @@ public class Aluno {
         this.dataNascimento = data_nascimento;
     }
 
-    public String getSexo() {
+    public char getSexo() {
         return sexo;
     }
 
-    public void setSexo(String sexo) {
+    public void setSexo(char sexo) {
         this.sexo = sexo;
     }
 
@@ -156,28 +150,12 @@ public class Aluno {
         this.bairro = bairro;
     }
 
-    public String getCidade() {
+    public Cidade getCidade() {
         return cidade;
     }
 
-    public void setCidade(String cidade) {
+    public void setCidade(Cidade cidade) {
         this.cidade = cidade;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public String getPais() {
-        return pais;
-    }
-
-    public void setPais(String pais) {
-        this.pais = pais;
     }
 
     public String getCep() {
@@ -217,9 +195,9 @@ public class Aluno {
                 + ", Cidade: "
                 + this.cidade
                 + ", Estado: "
-                + this.estado
+                + cidade.getEstado()
                 + ", País: "
-                + this.pais
+                + cidade.getPais()
                 + ", CEP: "
                 + this.cep);
     }

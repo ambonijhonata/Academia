@@ -5,7 +5,9 @@
 package com.estruturadados.academia.ghrapic;
 
 import com.estruturadados.academia.controler.ListagemAlunosViewController;
+import com.estruturadados.academia.database.model.Aluno;
 import java.sql.Connection;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,7 +21,7 @@ public class ListagemAlunosView extends javax.swing.JInternalFrame {
      */
     private ListagemAlunosViewController controller;
     private Connection connection;
-
+    
     public ListagemAlunosView(Connection connection) {
         initComponents();
         this.connection = connection;
@@ -35,14 +37,15 @@ public class ListagemAlunosView extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanelListagemAlunos = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDados = new javax.swing.JTable();
-        btnExcluir = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
-        btnCadastrar = new javax.swing.JButton();
         btnListar = new javax.swing.JButton();
+        btnCadastrar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
 
+        setBorder(null);
         setClosable(true);
         setTitle("Alunos");
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -63,18 +66,16 @@ public class ListagemAlunosView extends javax.swing.JInternalFrame {
             }
         });
 
-        jPanelListagemAlunos.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
         tblDados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Aluno", "Nascimento", "Cidade"
+                "Código", "Aluno", "Nascimento", "Cidade"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -82,17 +83,10 @@ public class ListagemAlunosView extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane1.setViewportView(tblDados);
-
-        btnExcluir.setText("Excluir");
-
-        btnEditar.setText("Editar");
-
-        btnCadastrar.setText("Cadastrar");
-        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastrarActionPerformed(evt);
-            }
-        });
+        if (tblDados.getColumnModel().getColumnCount() > 0) {
+            tblDados.getColumnModel().getColumn(0).setMinWidth(40);
+            tblDados.getColumnModel().getColumn(0).setMaxWidth(50);
+        }
 
         btnListar.setText("Listar");
         btnListar.addActionListener(new java.awt.event.ActionListener() {
@@ -101,54 +95,74 @@ public class ListagemAlunosView extends javax.swing.JInternalFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanelListagemAlunosLayout = new javax.swing.GroupLayout(jPanelListagemAlunos);
-        jPanelListagemAlunos.setLayout(jPanelListagemAlunosLayout);
-        jPanelListagemAlunosLayout.setHorizontalGroup(
-            jPanelListagemAlunosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelListagemAlunosLayout.createSequentialGroup()
+        btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
+
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 384, Short.MAX_VALUE)
+                .addComponent(btnListar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCadastrar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEditar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnExcluir))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelListagemAlunosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelListagemAlunosLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnListar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCadastrar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEditar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnExcluir)))
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
-        jPanelListagemAlunosLayout.setVerticalGroup(
-            jPanelListagemAlunosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelListagemAlunosLayout.createSequentialGroup()
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanelListagemAlunosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnExcluir)
                     .addComponent(btnEditar)
                     .addComponent(btnCadastrar)
                     .addComponent(btnListar))
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanelListagemAlunos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanelListagemAlunos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -166,7 +180,38 @@ public class ListagemAlunosView extends javax.swing.JInternalFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // TODO add your handling code here:
+        CadastrarAlunoView tela = new CadastrarAlunoView(connection, null);
+        this.getParent().add(tela);
+        tela.setVisible(true);
     }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        if (tblDados.getSelectedRow() != -1) {
+            Aluno aluno = new Aluno();
+            aluno.setCodigoAluno(Integer.parseInt(tblDados.getValueAt(tblDados.getSelectedRow(), 0).toString()));
+            aluno = controller.buscarAlunoByAluno(aluno.getCodigoAluno());
+            
+            CadastrarAlunoView tela = new CadastrarAlunoView(connection, aluno);
+            this.getParent().add(tela);
+            tela.setVisible(true);
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor selecione um aluno.", "Atenção", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
+        if (tblDados.getSelectedRow() != -1) {
+            if (controller.deletarAluno(Integer.parseInt(tblDados.getValueAt(tblDados.getSelectedRow(), 0).toString()))) {
+                JOptionPane.showMessageDialog(null, "Aluno excluído com sucesso.", "Atenção", JOptionPane.INFORMATION_MESSAGE);
+                controller.listarAlunos((DefaultTableModel) tblDados.getModel());
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor selecione um aluno.", "Atenção", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -174,7 +219,7 @@ public class ListagemAlunosView extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnListar;
-    private javax.swing.JPanel jPanelListagemAlunos;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblDados;
     // End of variables declaration//GEN-END:variables

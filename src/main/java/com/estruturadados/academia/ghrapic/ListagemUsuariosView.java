@@ -246,7 +246,7 @@ public class ListagemUsuariosView extends javax.swing.JInternalFrame {
             String chavePrimariaUsuario = String.valueOf(jTableListagemUsuarios.getValueAt(jTableListagemUsuarios.getSelectedRow(), 0));
             
             if(controller.deletarUsuario(chavePrimariaUsuario)){
-                JOptionPane.showMessageDialog(null, "Usuário excluído com sucesso.", "Atenção", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Usuário excluído com sucesso.", "Atenção", JOptionPane.INFORMATION_MESSAGE);
                 controller.listarUsuarios((DefaultTableModel) jTableListagemUsuarios.getModel());
             }
         }else{

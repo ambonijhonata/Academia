@@ -59,7 +59,6 @@ public class MainView extends javax.swing.JFrame {
         //grupo de menu
         jMenuCadastro.setMnemonic(KeyEvent.VK_C);
         jMenuItemAluno.setMnemonic(KeyEvent.VK_A);
-        jMenuItemCidades.setMnemonic(KeyEvent.VK_D);
         jMenuItemModalidade.setMnemonic(KeyEvent.VK_M);
         jMenuItemGraduacao.setMnemonic(KeyEvent.VK_G);
         jMenuItemPlano.setMnemonic(KeyEvent.VK_P);
@@ -109,7 +108,6 @@ public class MainView extends javax.swing.JFrame {
         jMenuItemSair = new javax.swing.JMenuItem();
         jMenuCadastro = new javax.swing.JMenu();
         jMenuItemAluno = new javax.swing.JMenuItem();
-        jMenuItemCidades = new javax.swing.JMenuItem();
         jMenuItemModalidade = new javax.swing.JMenuItem();
         jMenuItemGraduacao = new javax.swing.JMenuItem();
         jMenuItemPlano = new javax.swing.JMenuItem();
@@ -169,14 +167,6 @@ public class MainView extends javax.swing.JFrame {
             }
         });
         jMenuCadastro.add(jMenuItemAluno);
-
-        jMenuItemCidades.setText("Cidades");
-        jMenuItemCidades.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemCidadesActionPerformed(evt);
-            }
-        });
-        jMenuCadastro.add(jMenuItemCidades);
 
         jMenuItemModalidade.setText("Modalidade");
         jMenuCadastro.add(jMenuItemModalidade);
@@ -244,15 +234,6 @@ public class MainView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItemSairActionPerformed
 
-    private void jMenuItemCidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCidadesActionPerformed
-
-        ListaCidadesView listaCidadesView = new ListaCidadesView();
-
-        this.jDesktopPanelTelaPrincipal.add(listaCidadesView);
-
-        listaCidadesView.setVisible(true);
-    }//GEN-LAST:event_jMenuItemCidadesActionPerformed
-
     private void jMenuItemAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAlunoActionPerformed
         // TODO add your handling code here:
         ListagemAlunosView tela = new ListagemAlunosView(connection);
@@ -301,7 +282,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuCadastro;
     private javax.swing.JMenu jMenuFinanceiro;
     private javax.swing.JMenuItem jMenuItemAluno;
-    private javax.swing.JMenuItem jMenuItemCidades;
     private javax.swing.JMenuItem jMenuItemFatura;
     private javax.swing.JMenuItem jMenuItemGraduacao;
     private javax.swing.JMenuItem jMenuItemMatricula;

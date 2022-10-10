@@ -19,7 +19,7 @@ public class CadastrarUsuarioView extends javax.swing.JInternalFrame {
     /**
      * Creates new form CadastrarUsuarioView
      */
-    private final Connection connection;
+    private Connection connection;
     private CadastrarUsuarioViewController controller;
     private Usuario usuario;
     private boolean isEdicao = false;
