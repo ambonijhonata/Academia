@@ -8,20 +8,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.estruturadados.academia.database.model.Graduacao;
+import com.estruturadados.academia.database.model.Modalidade;
 import com.estruturadados.academia.database.model.Usuario;
 
 public class GraduacaoDAO extends SistemaDAO {
 
     private Connection conexao;
-    private String select = "select * from public.graduacoes;";
-    private String insert = "insert into public.graduacoes (modalidade, graduacao) values ( ?, ?);";
-    private String update = "update public.graduacoes set graduacao = ? where modalidade = ? and graduacao = ?;";
-    private String delete = "delete from public.graduacoes where modalidade = ? and graduacao = ?;";
+    private String select = "SELECT * FROM public.graduacoes ORDER BY modalidade ASC";
+    private String insert = "INSERT INTO public.graduacoes (modalidade, graduacao) VALUES ( ?, ?)";
+    private String update = "UPDATE public.graduacoes SET modalidade = ?, graduacao = ? WHERE modalidade = ? AND graduacao = ?";
+    private String delete = "DELETE FROM public.graduacoes WHERE modalidade = ? AND graduacao = ?;";
 
     private PreparedStatement pstSelect;
-	private PreparedStatement pstInsert;
-	private PreparedStatement pstUpdate;
-	private PreparedStatement pstDelete;
+    private PreparedStatement pstInsert;
+    private PreparedStatement pstUpdate;
+    private PreparedStatement pstDelete;
 
     public GraduacaoDAO(Connection conexao) throws SQLException {
         this.conexao = conexao;
@@ -34,8 +35,8 @@ public class GraduacaoDAO extends SistemaDAO {
     @Override
     public long Delete(Object param) {
         Graduacao g = (Graduacao) param;
-        try{
-            pstDelete.setString(1, g.getModalidade());
+        try {
+            //pstDelete.setString(1, g.getModalidade());
             pstDelete.setString(2, g.getGraduacao());
             pstDelete.execute();
         } catch (SQLException e) {
@@ -48,34 +49,45 @@ public class GraduacaoDAO extends SistemaDAO {
     @Override
     public int Insert(Object param) throws SQLException {
         Graduacao g = (Graduacao) param;
-        pstInsert.setString(1, g.getModalidade());
+        pstInsert.setString(1, g.getModalidade().getModalidade());
         pstInsert.setString(2, g.getGraduacao());
-        pstInsert.execute();
-        return 0;
+
+        try {
+            pstInsert.execute();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return pstInsert.getUpdateCount();
     }
 
     @Override
-    public List<Object> Select() throws SQLException {
-        
-        List<Object> lista = new ArrayList<>();
+    public List<Graduacao> Select() throws SQLException {
+        ResultSet resultado = pstSelect.executeQuery();
 
-        ResultSet resultado =  pstSelect.executeQuery();
+        List<Graduacao> lista = new ArrayList<>();
+
         while (resultado.next()) {
-            Graduacao g = new Graduacao();
-            g.setModalidade(resultado.getString("modalidade"));
-            g.setGraduacao(resultado.getString("graduacao"));
-            lista.add(g);
+            Modalidade modalidade = new Modalidade(resultado.getString("modalidade"));
+            Graduacao graduacao = new Graduacao(modalidade, resultado.getString("graduacao"));
+            lista.add(graduacao);
         }
 
         return lista;
     }
 
     @Override
-    public long Update(Object param, Object param2) {
-        Graduacao g = (Graduacao) param;
-        try{
-            pstUpdate.setString(2, g.getGraduacao());
+    public long Update(Object graduacaoAntiga, Object graduacaoNova) {
+        Graduacao gAntiga = (Graduacao) graduacaoAntiga;
+        Graduacao gNova = (Graduacao) graduacaoNova;
+
+        try {
+            pstUpdate.setString(1, gNova.getModalidade().getModalidade());
+            pstUpdate.setString(2, gNova.getGraduacao());
+            pstUpdate.setString(3, gAntiga.getModalidade().getModalidade());
+            pstUpdate.setString(4, gAntiga.getGraduacao());
             pstUpdate.execute();
+
+            return pstUpdate.getUpdateCount();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -88,4 +100,3 @@ public class GraduacaoDAO extends SistemaDAO {
     }
 
 }
-    

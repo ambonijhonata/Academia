@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 public class ModalidadeDAO extends SistemaDAO {
 
     private Connection conexao;
-    private String select = "select * from modalidades";
+    private String select = "select * from modalidades order by modalidade asc";
     private String insert = "insert into modalidades (modalidade) VALUES (?)";
     private String delete = "delete from modalidades where modalidade = ? ;";
     private String update = "UPDATE modalidades SET modalidade = ? WHERE modalidade = ?";

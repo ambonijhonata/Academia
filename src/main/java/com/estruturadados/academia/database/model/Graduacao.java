@@ -1,23 +1,23 @@
 package com.estruturadados.academia.database.model;
 
 public class Graduacao {
-    private String modalidade;
+
+    private Modalidade modalidade;
     private String graduacao;
 
     public Graduacao() {
-        
     }
 
-    public Graduacao(String modalidade, String graduacao) {
+    public Graduacao(Modalidade modalidade, String graduacao) {
         this.modalidade = modalidade;
         this.graduacao = graduacao;
     }
 
-    public String getModalidade() {
+    public Modalidade getModalidade() {
         return modalidade;
     }
 
-    public void setModalidade(String modalidade) {
+    public void setModalidade(Modalidade modalidade) {
         this.modalidade = modalidade;
     }
 
@@ -31,6 +31,7 @@ public class Graduacao {
 
     @Override
     public String toString() {
-        return "modalidade=" + modalidade + ", graduacao=" + graduacao + "";
+        return "Graduacao{" + "modalidade=" + modalidade + ", graduacao=" + graduacao + '}';
     }
+
 }

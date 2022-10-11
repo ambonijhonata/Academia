@@ -177,6 +177,11 @@ public class MainView extends javax.swing.JFrame {
         jMenuCadastro.add(jMenuItemModalidade);
 
         jMenuItemGraduacao.setText("Graduação");
+        jMenuItemGraduacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemGraduacaoActionPerformed(evt);
+            }
+        });
         jMenuCadastro.add(jMenuItemGraduacao);
 
         jMenuItemPlano.setText("Plano");
@@ -252,6 +257,13 @@ public class MainView extends javax.swing.JFrame {
         jDesktopPanelTelaPrincipal.add(tela);
         tela.setVisible(true);
     }//GEN-LAST:event_jMenuItemModalidadeActionPerformed
+
+    private void jMenuItemGraduacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGraduacaoActionPerformed
+        // TODO add your handling code here:
+        ListagemGraduacoesView tela = new ListagemGraduacoesView(connection);
+        jDesktopPanelTelaPrincipal.add(tela);
+        tela.setVisible(true);
+    }//GEN-LAST:event_jMenuItemGraduacaoActionPerformed
 
     /**
      * @param args the command line arguments

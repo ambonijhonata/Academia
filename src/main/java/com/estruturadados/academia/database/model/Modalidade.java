@@ -6,7 +6,9 @@ public class Modalidade {
     public Modalidade() {
         
     }
-
+    
+    
+    
     public Modalidade(String modalidade) {
         this.modalidade = modalidade;
     }
@@ -21,6 +23,6 @@ public class Modalidade {
 
     @Override
     public String toString() {
-        return "modalidade=" + modalidade + "";
+        return modalidade;
     }
 }
