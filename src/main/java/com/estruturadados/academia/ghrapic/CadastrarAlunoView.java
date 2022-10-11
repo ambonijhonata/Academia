@@ -4,7 +4,7 @@
  */
 package com.estruturadados.academia.ghrapic;
 
-import com.estruturadados.academia.controler.CadastrarAlunoViewController;
+import com.estruturadados.academia.controller.CadastrarAlunoViewController;
 import com.estruturadados.academia.database.model.Aluno;
 import com.estruturadados.academia.database.model.Cidade;
 import java.sql.Connection;
