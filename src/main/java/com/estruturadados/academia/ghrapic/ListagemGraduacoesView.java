@@ -4,7 +4,7 @@
  */
 package com.estruturadados.academia.ghrapic;
 
-import com.estruturadados.academia.controler.ListagemGraduacoesViewController;
+import com.estruturadados.academia.controller.ListagemGraduacoesViewController;
 import com.estruturadados.academia.database.model.Graduacao;
 import com.estruturadados.academia.database.model.Modalidade;
 import java.sql.Connection;

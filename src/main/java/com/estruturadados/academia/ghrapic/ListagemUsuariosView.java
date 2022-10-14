@@ -5,7 +5,7 @@
  */
 package com.estruturadados.academia.ghrapic;
 
-import com.estruturadados.academia.controler.ListagemUsuariosViewController;
+import com.estruturadados.academia.controller.ListagemUsuariosViewController;
 import com.estruturadados.academia.database.model.Usuario;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;

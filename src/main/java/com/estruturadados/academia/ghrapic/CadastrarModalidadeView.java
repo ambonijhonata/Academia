@@ -4,7 +4,7 @@
  */
 package com.estruturadados.academia.ghrapic;
 
-import com.estruturadados.academia.controler.CadastrarModalidadeViewController;
+import com.estruturadados.academia.controller.CadastrarModalidadeViewController;
 import com.estruturadados.academia.database.model.Modalidade;
 import java.sql.Connection;
 import javax.swing.JOptionPane;

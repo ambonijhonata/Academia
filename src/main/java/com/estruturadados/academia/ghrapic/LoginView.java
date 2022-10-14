@@ -4,7 +4,7 @@
  */
 package com.estruturadados.academia.ghrapic;
 
-import com.estruturadados.academia.controler.LoginViewController;
+import com.estruturadados.academia.controller.LoginViewController;
 import com.estruturadados.academia.database.ConnectionFactory;
 import com.estruturadados.academia.database.dao.UsuarioDAO;
 import com.estruturadados.academia.database.model.Usuario;

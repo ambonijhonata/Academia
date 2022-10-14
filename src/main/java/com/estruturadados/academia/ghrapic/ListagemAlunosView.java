@@ -4,7 +4,7 @@
  */
 package com.estruturadados.academia.ghrapic;
 
-import com.estruturadados.academia.controler.ListagemAlunosViewController;
+import com.estruturadados.academia.controller.ListagemAlunosViewController;
 import com.estruturadados.academia.database.model.Aluno;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
