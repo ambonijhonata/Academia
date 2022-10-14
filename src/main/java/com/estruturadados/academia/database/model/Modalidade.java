@@ -1,14 +1,13 @@
 package com.estruturadados.academia.database.model;
 
 public class Modalidade {
+
     private String modalidade;
 
     public Modalidade() {
-        
+
     }
-    
-    
-    
+
     public Modalidade(String modalidade) {
         this.modalidade = modalidade;
     }

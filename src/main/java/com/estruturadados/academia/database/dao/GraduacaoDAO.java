@@ -17,7 +17,7 @@ public class GraduacaoDAO extends SistemaDAO {
     private String select = "SELECT * FROM public.graduacoes ORDER BY modalidade ASC";
     private String insert = "INSERT INTO public.graduacoes (modalidade, graduacao) VALUES ( ?, ?)";
     private String update = "UPDATE public.graduacoes SET modalidade = ?, graduacao = ? WHERE modalidade = ? AND graduacao = ?";
-    private String delete = "DELETE FROM public.graduacoes WHERE modalidade = ? AND graduacao = ?;";
+    private String delete = "DELETE FROM public.graduacoes WHERE modalidade = ?";
 
     private PreparedStatement pstSelect;
     private PreparedStatement pstInsert;
@@ -34,11 +34,12 @@ public class GraduacaoDAO extends SistemaDAO {
 
     @Override
     public long Delete(Object param) {
-        Graduacao g = (Graduacao) param;
-        try {
-            //pstDelete.setString(1, g.getModalidade());
-            pstDelete.setString(2, g.getGraduacao());
+        
+        try {            
+            pstDelete.setString(1, param.toString());
             pstDelete.execute();
+            
+            return pstDelete.getUpdateCount();
         } catch (SQLException e) {
             e.printStackTrace();
         }

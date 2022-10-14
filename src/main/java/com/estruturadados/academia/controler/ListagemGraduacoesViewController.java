@@ -9,6 +9,8 @@ import com.estruturadados.academia.database.model.Graduacao;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -38,5 +40,17 @@ public class ListagemGraduacoesViewController {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+    }
+    
+    public boolean deletarGraduacao(String modalidade){
+        try {
+            GraduacaoDAO graduacaoDAO = new GraduacaoDAO(connection);
+            
+            return graduacaoDAO.Delete(modalidade) > 0;            
+        } catch (SQLException ex) {
+            Logger.getLogger(ListagemGraduacoesViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
     }
 }

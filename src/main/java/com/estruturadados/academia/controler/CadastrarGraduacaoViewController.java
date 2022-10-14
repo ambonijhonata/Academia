@@ -27,11 +27,10 @@ public class CadastrarGraduacaoViewController {
         this.connection = connection;
     }
 
-    public void carregarModalidades(JComboBox<Object> jCombobox) {
-        List<Modalidade> listaModalidades = null;
-        try {
+    public void carregarModalidades(JComboBox<Object> jCombobox) {        
+        try {            
             ModalidadeDAO modalidadeDAO = new ModalidadeDAO(connection);
-            listaModalidades = modalidadeDAO.Select();
+            List<Modalidade> listaModalidades = modalidadeDAO.Select();
 
             for (Modalidade m : listaModalidades) {
                 jCombobox.addItem(m);

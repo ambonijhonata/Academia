@@ -8,6 +8,7 @@ import com.estruturadados.academia.controler.ListagemGraduacoesViewController;
 import com.estruturadados.academia.database.model.Graduacao;
 import com.estruturadados.academia.database.model.Modalidade;
 import java.sql.Connection;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,14 +20,13 @@ public class ListagemGraduacoesView extends javax.swing.JInternalFrame {
     /**
      * Creates new form ListagemGraduacoesView
      */
-    
     private Connection connection;
     private ListagemGraduacoesViewController controller;
     
     public ListagemGraduacoesView(Connection connection) {
         initComponents();
         this.connection = connection;
-        controller = new ListagemGraduacoesViewController(this.connection);        
+        controller = new ListagemGraduacoesViewController(this.connection);
     }
 
     /**
@@ -91,6 +91,11 @@ public class ListagemGraduacoesView extends javax.swing.JInternalFrame {
         }
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -185,7 +190,7 @@ public class ListagemGraduacoesView extends javax.swing.JInternalFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
-        if(jTableDados.getSelectedRow() != -1){
+        if (jTableDados.getSelectedRow() != -1) {
             Graduacao graduacao = new Graduacao();
             graduacao.setModalidade(new Modalidade(jTableDados.getValueAt(jTableDados.getSelectedRow(), 0).toString()));
             graduacao.setGraduacao(jTableDados.getValueAt(jTableDados.getSelectedRow(), 1).toString());
@@ -193,8 +198,25 @@ public class ListagemGraduacoesView extends javax.swing.JInternalFrame {
             CadastrarGraduacaoView tela = new CadastrarGraduacaoView(connection, graduacao);
             this.getParent().add(tela);
             tela.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor selecione uma graduação.", "Atenção", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
+        if (jTableDados.getSelectedRow() != -1) {
+            String modalidade = jTableDados.getValueAt(jTableDados.getSelectedRow(), 0).toString();
+            if (controller.deletarGraduacao(modalidade)) {
+                JOptionPane.showMessageDialog(null, "Graduação excluída com sucesso.", "Atenção", JOptionPane.INFORMATION_MESSAGE);
+                controller.listarGraduacoes((DefaultTableModel) jTableDados.getModel());
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro ao excluir graduação.", "Atenção", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor selecione uma graduação.", "Atenção", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

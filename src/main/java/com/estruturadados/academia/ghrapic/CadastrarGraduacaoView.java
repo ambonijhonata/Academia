@@ -7,6 +7,7 @@ package com.estruturadados.academia.ghrapic;
 import com.estruturadados.academia.controler.CadastrarGraduacaoViewController;
 import com.estruturadados.academia.database.model.Graduacao;
 import com.estruturadados.academia.database.model.Modalidade;
+import java.awt.Dimension;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
 
@@ -27,20 +28,31 @@ public class CadastrarGraduacaoView extends javax.swing.JInternalFrame {
     public CadastrarGraduacaoView(Connection connection, Graduacao graduacao) {
         initComponents();
         this.connection = connection;
+        this.graduacao = graduacao;
         controller = new CadastrarGraduacaoViewController(connection);
+        jComboBoxModalidades.removeAllItems();
         controller.carregarModalidades(jComboBoxModalidades);
         
-        if(graduacao != null){            
-            carregarDadosEdicao(graduacao);            
+        if(this.graduacao != null){            
+            carregarDadosEdicao(this.graduacao);            
         }
           
     }
 
     private void carregarDadosEdicao(Graduacao graduacao){
-        isEdicao = true;
+        isEdicao = true;   
         
-        jComboBoxModalidades.setSelectedItem(graduacao.getModalidade().getModalidade());
+        /*Não foi usado o comando abaixo pois não funcionou, mesmo quando tentado selecionar o objeto
+          jComboBoxModalidades.setSelectedItem(graduacao.getModalidade().getModalidade());
+        */
+        for(int i = 0; i < jComboBoxModalidades.getItemCount(); i++){
+            if(jComboBoxModalidades.getItemAt(i).toString().equals(graduacao.getModalidade().getModalidade())){
+                jComboBoxModalidades.setSelectedIndex(i);
+                break;
+            }
+        }        
         jTextFieldGraduacao.setText(graduacao.getGraduacao());
+                
     }
     /**
      * This method is called from within the constructor to initialize the form.
