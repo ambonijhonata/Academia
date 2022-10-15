@@ -22,7 +22,7 @@ public class ListagemGraduacoesView extends javax.swing.JInternalFrame {
      */
     private Connection connection;
     private ListagemGraduacoesViewController controller;
-    
+
     public ListagemGraduacoesView(Connection connection) {
         initComponents();
         this.connection = connection;
@@ -194,7 +194,7 @@ public class ListagemGraduacoesView extends javax.swing.JInternalFrame {
             Graduacao graduacao = new Graduacao();
             graduacao.setModalidade(new Modalidade(jTableDados.getValueAt(jTableDados.getSelectedRow(), 0).toString()));
             graduacao.setGraduacao(jTableDados.getValueAt(jTableDados.getSelectedRow(), 1).toString());
-            
+
             CadastrarGraduacaoView tela = new CadastrarGraduacaoView(connection, graduacao);
             this.getParent().add(tela);
             tela.setVisible(true);

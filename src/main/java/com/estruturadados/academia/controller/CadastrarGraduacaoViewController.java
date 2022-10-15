@@ -11,8 +11,6 @@ import com.estruturadados.academia.database.model.Modalidade;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JComboBox;
 
 /**
@@ -27,8 +25,8 @@ public class CadastrarGraduacaoViewController {
         this.connection = connection;
     }
 
-    public void carregarModalidades(JComboBox<Object> jCombobox) {        
-        try {            
+    public void carregarModalidades(JComboBox<Object> jCombobox) {
+        try {
             ModalidadeDAO modalidadeDAO = new ModalidadeDAO(connection);
             List<Modalidade> listaModalidades = modalidadeDAO.Select();
 
@@ -61,7 +59,7 @@ public class CadastrarGraduacaoViewController {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        
+
         return qtdRowsAffected > 0;
     }
 }

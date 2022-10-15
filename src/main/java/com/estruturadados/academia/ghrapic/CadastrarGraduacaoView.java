@@ -7,7 +7,6 @@ package com.estruturadados.academia.ghrapic;
 import com.estruturadados.academia.controller.CadastrarGraduacaoViewController;
 import com.estruturadados.academia.database.model.Graduacao;
 import com.estruturadados.academia.database.model.Modalidade;
-import java.awt.Dimension;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
 
@@ -32,28 +31,29 @@ public class CadastrarGraduacaoView extends javax.swing.JInternalFrame {
         controller = new CadastrarGraduacaoViewController(connection);
         jComboBoxModalidades.removeAllItems();
         controller.carregarModalidades(jComboBoxModalidades);
-        
-        if(this.graduacao != null){            
-            carregarDadosEdicao(this.graduacao);            
+
+        if (this.graduacao != null) {
+            carregarDadosEdicao(this.graduacao);
         }
-          
+
     }
 
-    private void carregarDadosEdicao(Graduacao graduacao){
-        isEdicao = true;   
-        
+    private void carregarDadosEdicao(Graduacao graduacao) {
+        isEdicao = true;
+
         /*Não foi usado o comando abaixo pois não funcionou, mesmo quando tentado selecionar o objeto
           jComboBoxModalidades.setSelectedItem(graduacao.getModalidade().getModalidade());
-        */
-        for(int i = 0; i < jComboBoxModalidades.getItemCount(); i++){
-            if(jComboBoxModalidades.getItemAt(i).toString().equals(graduacao.getModalidade().getModalidade())){
+         */
+        for (int i = 0; i < jComboBoxModalidades.getItemCount(); i++) {
+            if (jComboBoxModalidades.getItemAt(i).toString().equals(graduacao.getModalidade().getModalidade())) {
                 jComboBoxModalidades.setSelectedIndex(i);
                 break;
             }
-        }        
+        }
         jTextFieldGraduacao.setText(graduacao.getGraduacao());
-                
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

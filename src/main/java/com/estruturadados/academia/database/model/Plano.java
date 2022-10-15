@@ -1,25 +1,26 @@
 package com.estruturadados.academia.database.model;
 
 public class Plano {
-    private String modalidade;
+
+    private Modalidade modalidade;
     private String plano;
     private double valorMensal;
 
     public Plano() {
-        
+
     }
 
-    public Plano(String modalidade, String plano, double valorMensal) {
+    public Plano(Modalidade modalidade, String plano, double valorMensal) {
         this.modalidade = modalidade;
         this.plano = plano;
         this.valorMensal = valorMensal;
     }
 
-    public String getModalidade() {
+    public Modalidade getModalidade() {
         return modalidade;
     }
 
-    public void setModalidade(String modalidade) {
+    public void setModalidade(Modalidade modalidade) {
         this.modalidade = modalidade;
     }
 

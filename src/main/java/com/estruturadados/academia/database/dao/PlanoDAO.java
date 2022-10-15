@@ -1,5 +1,6 @@
 package com.estruturadados.academia.database.dao;
 
+import com.estruturadados.academia.database.model.Modalidade;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,18 +11,19 @@ import java.util.List;
 import com.estruturadados.academia.database.model.Plano;
 import com.estruturadados.academia.database.model.Usuario;
 
-public class PlanoDAO extends SistemaDAO{
-    
+public class PlanoDAO extends SistemaDAO {
+
     private Connection conexao;
     private String select = "select * from public.planos;";
     private String insert = "insert into public.planos (modalidade, plano, valor_mensal) values ( ?, ?, ?);";
-    private String update = "update public.planos set plano = ? where modalidade = ? and plano = ?;";
-    private String delete = "delete from public.planos where modalidade = ? and plano = ?;";
-    
+    private String update = "update public.planos set modalidade = ?, plano = ?, valor_mensal = ? "
+                            + "WHERE modalidade = ? AND plano = ? " ;
+    private String delete = "delete from public.planos where modalidade = ? and plano = ? ";
+
     private PreparedStatement pstSelect;
-	private PreparedStatement pstInsert;
-	private PreparedStatement pstUpdate;
-	private PreparedStatement pstDelete;
+    private PreparedStatement pstInsert;
+    private PreparedStatement pstUpdate;
+    private PreparedStatement pstDelete;
 
     public PlanoDAO(Connection conexao) throws SQLException {
         this.conexao = conexao;
@@ -30,14 +32,16 @@ public class PlanoDAO extends SistemaDAO{
         pstUpdate = this.conexao.prepareStatement(update);
         pstDelete = this.conexao.prepareStatement(delete);
     }
-    
+
     @Override
     public long Delete(Object param) {
         Plano p = (Plano) param;
-        try{
-            pstDelete.setString(1, p.getModalidade());
+        try {
+            pstDelete.setString(1, p.getModalidade().getModalidade());
             pstDelete.setString(2, p.getPlano());
             pstDelete.execute();
+            
+            return pstDelete.getUpdateCount();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -47,34 +51,45 @@ public class PlanoDAO extends SistemaDAO{
     @Override
     public int Insert(Object param) throws SQLException {
         Plano p = (Plano) param;
-        pstInsert.setString(1, p.getModalidade());
+        pstInsert.setString(1, p.getModalidade().getModalidade());
         pstInsert.setString(2, p.getPlano());
         pstInsert.setDouble(3, p.getValorMensal());
         pstInsert.execute();
-        return 0;
+
+        return pstInsert.getUpdateCount();
     }
 
     @Override
-    public List<Object> Select() throws SQLException {
-        ResultSet resultado =  pstSelect.executeQuery();
-        List<Object> lista = new ArrayList<Object>();
+    public List<Plano> Select() throws SQLException {
+        ResultSet resultado = pstSelect.executeQuery();
+        List<Plano> lista = new ArrayList<>();
 
-        while(resultado.next()){
+        while (resultado.next()) {
             Plano p = new Plano();
-            p.setModalidade(resultado.getString("modalidade"));
+            Modalidade modalidade = new Modalidade(resultado.getString("modalidade"));
+            p.setModalidade(modalidade);
             p.setPlano(resultado.getString("plano"));
             p.setValorMensal(resultado.getDouble("valor_mensal"));
             lista.add(p);
         }
-        return null;
+        return lista;
     }
 
     @Override
-    public long Update(Object param, Object param2) {
-        Plano p = (Plano) param;
-        try{
-            pstUpdate.setString(5, p.getPlano());
+    public long Update(Object planoAntigo, Object planoNovo) {
+        Plano pAntigo = (Plano) planoAntigo;
+        Plano pNovo = (Plano) planoNovo;
+
+        try {
+            pstUpdate.setString(1, pNovo.getModalidade().getModalidade());
+            pstUpdate.setString(2, pNovo.getPlano());
+            pstUpdate.setDouble(3, pNovo.getValorMensal());
+            pstUpdate.setString(4, pAntigo.getModalidade().getModalidade());
+            pstUpdate.setString(5, pAntigo.getPlano());
+            
             pstUpdate.execute();
+            
+            return pstUpdate.getUpdateCount();
         } catch (SQLException e) {
             e.printStackTrace();
         }
