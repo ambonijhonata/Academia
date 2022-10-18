@@ -25,31 +25,30 @@ public class MainView extends javax.swing.JFrame {
     private Connection connection;
     //APARTIR DO PERFIL DESSE CARA FAZER AS LIBERAÇÕES DE MENU DE ACOROD COM O QUE O PROFESSOR PASSOU
     private Usuario usuario;
-    
+
     public MainView() {
         initComponents();
         definirTeclasAtalho();
         usuario = new Usuario();
-        conectarBanco();        
     }
 
-    public void preencherUsuario(Usuario usuario){        
+    public void preencherUsuario(Usuario usuario, Connection connection) {
+        this.connection = connection;
         this.usuario.setUsuario(usuario.getUsuario());
-        this.usuario.setSenha(usuario.getSenha());
         this.usuario.setPerfil(usuario.getPerfil());
-        
+
         //define menus
-        switch(this.usuario.getPerfil()){
-            case "CADASTRAL" :
-                jMenuFinanceiro.setVisible(false);                
+        switch (this.usuario.getPerfil()) {
+            case "CADASTRAL":
+                jMenuFinanceiro.setVisible(false);
                 break;
-            case "FINANCEIRO" :
+            case "FINANCEIRO":
                 jMenuItemUsuarios.setVisible(false);
                 jMenuCadastro.setVisible(false);
                 break;
         }
     }
-    
+
     private void definirTeclasAtalho() {
         //grupo de menu Sistema    
         jMenuSistema.setMnemonic(KeyEvent.VK_M);
@@ -75,19 +74,19 @@ public class MainView extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }
-    
-    private void defineMenusPerfilAdministrador(){
-        
+
+    private void defineMenusPerfilAdministrador() {
+
     }
-    
-    private void defineMenusPerfilCadastral(){
-        
+
+    private void defineMenusPerfilCadastral() {
+
     }
-    
-    private void defineMenusPerfilFinanceiro(){
-        
+
+    private void defineMenusPerfilFinanceiro() {
+
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -197,6 +196,11 @@ public class MainView extends javax.swing.JFrame {
         jMenuFinanceiro.setText("Financeiro");
 
         jMenuItemMatricula.setText("Matrícula");
+        jMenuItemMatricula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemMatriculaActionPerformed(evt);
+            }
+        });
         jMenuFinanceiro.add(jMenuItemMatricula);
 
         jMenuProcessos.setText("Processos");
@@ -252,8 +256,8 @@ public class MainView extends javax.swing.JFrame {
     private void jMenuItemAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAlunoActionPerformed
         // TODO add your handling code here:
         ListagemAlunosView tela = new ListagemAlunosView(connection);
-       jDesktopPanelTelaPrincipal.add(tela);
-       tela.setVisible(true);
+        jDesktopPanelTelaPrincipal.add(tela);
+        tela.setVisible(true);
     }//GEN-LAST:event_jMenuItemAlunoActionPerformed
 
     private void jMenuItemModalidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemModalidadeActionPerformed
@@ -276,6 +280,13 @@ public class MainView extends javax.swing.JFrame {
         jDesktopPanelTelaPrincipal.add(tela);
         tela.setVisible(true);
     }//GEN-LAST:event_jMenuItemPlanoActionPerformed
+
+    private void jMenuItemMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMatriculaActionPerformed
+        // TODO add your handling code here:
+        ListagemMatriculasView tela = new ListagemMatriculasView(connection);
+        jDesktopPanelTelaPrincipal.add(tela);
+        tela.setVisible(true);
+    }//GEN-LAST:event_jMenuItemMatriculaActionPerformed
 
     /**
      * @param args the command line arguments

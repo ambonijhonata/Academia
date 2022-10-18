@@ -15,11 +15,13 @@ public class GraduacaoDAO extends SistemaDAO {
 
     private Connection conexao;
     private String select = "SELECT * FROM public.graduacoes ORDER BY modalidade ASC";
+    private String selectWithCondition = "SELECT * FROM public.graduacoes WHERE modalidade = ?";
     private String insert = "INSERT INTO public.graduacoes (modalidade, graduacao) VALUES ( ?, ?)";
     private String update = "UPDATE public.graduacoes SET modalidade = ?, graduacao = ? WHERE modalidade = ? AND graduacao = ?";
     private String delete = "DELETE FROM public.graduacoes WHERE modalidade = ?";
 
     private PreparedStatement pstSelect;
+    private PreparedStatement pstSelectWithCondition;
     private PreparedStatement pstInsert;
     private PreparedStatement pstUpdate;
     private PreparedStatement pstDelete;
@@ -27,6 +29,7 @@ public class GraduacaoDAO extends SistemaDAO {
     public GraduacaoDAO(Connection conexao) throws SQLException {
         this.conexao = conexao;
         pstSelect = this.conexao.prepareStatement(select);
+        pstSelectWithCondition = this.conexao.prepareStatement(selectWithCondition);
         pstInsert = this.conexao.prepareStatement(insert);
         pstUpdate = this.conexao.prepareStatement(update);
         pstDelete = this.conexao.prepareStatement(delete);
@@ -34,11 +37,11 @@ public class GraduacaoDAO extends SistemaDAO {
 
     @Override
     public long Delete(Object param) {
-        
-        try {            
+
+        try {
             pstDelete.setString(1, param.toString());
             pstDelete.execute();
-            
+
             return pstDelete.getUpdateCount();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -96,8 +99,17 @@ public class GraduacaoDAO extends SistemaDAO {
     }
 
     @Override
-    public Usuario SelectWithCondition(Object usuarioBuscar) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Boolean SelectWithCondition(Object modalidadeBuscar) throws SQLException {
+        Modalidade modalidade = (Modalidade) modalidadeBuscar;
+
+        pstSelectWithCondition.setString(1, modalidade.getModalidade());
+        ResultSet rs = pstSelectWithCondition.executeQuery();
+
+        if (rs.next()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

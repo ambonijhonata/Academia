@@ -4,7 +4,9 @@
  */
 package com.estruturadados.academia.controller;
 
+import com.estruturadados.academia.database.dao.GraduacaoDAO;
 import com.estruturadados.academia.database.dao.ModalidadeDAO;
+import com.estruturadados.academia.database.dao.PlanoDAO;
 import com.estruturadados.academia.database.model.Modalidade;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -48,6 +50,28 @@ public class ListagemModalidadesViewController {
             ModalidadeDAO modalidadeDAO = new ModalidadeDAO(connection);
 
             return modalidadeDAO.Delete(modalidade) > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean verificarVinculoModalidadeGraduacao(Modalidade modalidade) {
+        try {
+            GraduacaoDAO graduacaoDAO = new GraduacaoDAO(connection);
+
+            return graduacaoDAO.SelectWithCondition(modalidade);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean verificarVinculoModalidadePlano(Modalidade modalidade) {
+        try {
+            PlanoDAO planoDAO = new PlanoDAO(connection);
+
+            return planoDAO.SelectWithCondition(modalidade);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

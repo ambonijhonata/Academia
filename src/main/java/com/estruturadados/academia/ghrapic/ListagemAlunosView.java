@@ -21,7 +21,7 @@ public class ListagemAlunosView extends javax.swing.JInternalFrame {
      */
     private ListagemAlunosViewController controller;
     private Connection connection;
-    
+
     public ListagemAlunosView(Connection connection) {
         initComponents();
         this.connection = connection;
@@ -191,11 +191,11 @@ public class ListagemAlunosView extends javax.swing.JInternalFrame {
             Aluno aluno = new Aluno();
             aluno.setCodigoAluno(Integer.parseInt(tblDados.getValueAt(tblDados.getSelectedRow(), 0).toString()));
             aluno = controller.buscarAlunoByAluno(aluno.getCodigoAluno());
-            
+
             CadastrarAlunoView tela = new CadastrarAlunoView(connection, aluno);
             this.getParent().add(tela);
             tela.setVisible(true);
-            
+
         } else {
             JOptionPane.showMessageDialog(null, "Por favor selecione um aluno.", "Atenção", JOptionPane.WARNING_MESSAGE);
         }
@@ -204,9 +204,17 @@ public class ListagemAlunosView extends javax.swing.JInternalFrame {
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
         if (tblDados.getSelectedRow() != -1) {
-            if (controller.deletarAluno(Integer.parseInt(tblDados.getValueAt(tblDados.getSelectedRow(), 0).toString()))) {
-                JOptionPane.showMessageDialog(null, "Aluno excluído com sucesso.", "Atenção", JOptionPane.INFORMATION_MESSAGE);
-                controller.listarAlunos((DefaultTableModel) tblDados.getModel());
+            Aluno aluno = new Aluno();
+            aluno.setCodigoAluno(Integer.parseInt(tblDados.getValueAt(tblDados.getSelectedRow(), 0).toString()));
+            if (!controller.verificarVinculoAlunoMatricula(aluno)) {
+                if (controller.deletarAluno(Integer.parseInt(tblDados.getValueAt(tblDados.getSelectedRow(), 0).toString()))) {
+                    JOptionPane.showMessageDialog(null, "Aluno excluído com sucesso.", "Atenção", JOptionPane.INFORMATION_MESSAGE);
+                    controller.listarAlunos((DefaultTableModel) tblDados.getModel());
+                } else {
+                    JOptionPane.showMessageDialog(null, "Erro ao excluir aluno.", "Atenção", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro ao excluir aluno. O aluno está matriculado.", "Atenção", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Por favor selecione um aluno.", "Atenção", JOptionPane.WARNING_MESSAGE);

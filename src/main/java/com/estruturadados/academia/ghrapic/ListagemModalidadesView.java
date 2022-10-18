@@ -21,7 +21,7 @@ public class ListagemModalidadesView extends javax.swing.JInternalFrame {
      */
     private ListagemModalidadesViewController controller;
     private Connection connection;
-
+    
     public ListagemModalidadesView(Connection connection) {
         initComponents();
         this.connection = connection;
@@ -199,12 +199,17 @@ public class ListagemModalidadesView extends javax.swing.JInternalFrame {
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         // TODO add your handling code here:
         if (tblDados.getSelectedRow() != -1) {
-            Modalidade modalidade = new Modalidade(tblDados.getValueAt(tblDados.getSelectedRow(), 0).toString());
-            if (controller.deletarModalidade(modalidade)) {
-                JOptionPane.showMessageDialog(null, "Modalidade excluída com sucesso.", "Atenção", JOptionPane.INFORMATION_MESSAGE);
-                controller.listarModalidades((DefaultTableModel) tblDados.getModel());
+            Modalidade modalidade = new Modalidade();
+            modalidade.setModalidade(tblDados.getValueAt(tblDados.getSelectedRow(), 0).toString());            
+            if (!controller.verificarVinculoModalidadeGraduacao(modalidade) && !controller.verificarVinculoModalidadePlano(modalidade)) {
+                if (controller.deletarModalidade(modalidade)) {
+                    JOptionPane.showMessageDialog(null, "Modalidade excluída com sucesso.", "Atenção", JOptionPane.INFORMATION_MESSAGE);
+                    controller.listarModalidades((DefaultTableModel) tblDados.getModel());
+                } else {
+                    JOptionPane.showMessageDialog(null, "Erro ao excluir modalidade.", "Atenção", JOptionPane.ERROR_MESSAGE);
+                }
             } else {
-                JOptionPane.showMessageDialog(null, "Erro ao excluir modalidade.", "Atenção", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Erro ao excluir modalidade. A modalidade possuí vinculos.", "Atenção", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Por favor selecione uma modalidade.", "Atenção", JOptionPane.WARNING_MESSAGE);

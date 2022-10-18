@@ -82,7 +82,7 @@ public class CadastrarUsuarioView extends javax.swing.JInternalFrame {
 
         lblPerfil.setText("Perfil:");
 
-        cmbPerfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Cadastral", "Financeiro" }));
+        cmbPerfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ADMINISTRADOR", "CADASTRAL", "FINANCEIRO" }));
 
         jButtonGravar.setText("Gravar");
         jButtonGravar.addActionListener(new java.awt.event.ActionListener() {
@@ -193,14 +193,14 @@ public class CadastrarUsuarioView extends javax.swing.JInternalFrame {
             if (controller.atualizarUsuario(usuario, usuarioEditado)) {
                 JOptionPane.showMessageDialog(null, "Usuário atualizado com sucesso.", "Atenção", JOptionPane.INFORMATION_MESSAGE);
             }
-        }
-        if (!controller.verificarUsuarioExiste(txtUsuarioValue)) {
-            controller.inserirUsuario(usuarioEditado);
-            JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso.", "Atenção", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar usuário.", "Atenção", JOptionPane.ERROR_MESSAGE);
+            if (!controller.verificarUsuarioExiste(txtUsuarioValue)) {
+                controller.inserirUsuario(usuarioEditado);
+                JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso.", "Atenção", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro ao cadastrar usuário.", "Atenção", JOptionPane.ERROR_MESSAGE);
+            }
         }
-
         this.dispose();
     }//GEN-LAST:event_jButtonGravarActionPerformed
 

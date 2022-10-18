@@ -19,6 +19,7 @@ C:\a\Academia\src\main\java\com\estruturadados\academia\ghrapic\ListagemGraduaco
 C:\a\Academia\src\main\java\com\estruturadados\academia\ghrapic\CadastrarAlunoView.java
 C:\a\Academia\src\main\java\com\estruturadados\academia\database\Teste.java
 C:\a\Academia\src\main\java\com\estruturadados\academia\database\model\Aluno.java
+C:\a\Academia\src\main\java\com\estruturadados\academia\controller\ListagemMatriculasViewController.java
 C:\a\Academia\src\main\java\com\estruturadados\academia\database\ConnectionFactory.java
 C:\a\Academia\src\main\java\com\estruturadados\academia\database\dao\GraduacaoDAO.java
 C:\a\Academia\src\main\java\com\estruturadados\academia\controller\CadastrarModalidadeViewController.java
@@ -38,8 +39,11 @@ C:\a\Academia\src\main\java\com\estruturadados\academia\database\dao\FaturaMatri
 C:\a\Academia\src\main\java\com\estruturadados\academia\ghrapic\MainView.java
 C:\a\Academia\src\main\java\com\estruturadados\academia\ghrapic\ListagemUsuariosView.java
 C:\a\Academia\src\main\java\com\estruturadados\academia\database\model\Cidade.java
+C:\a\Academia\src\main\java\com\estruturadados\academia\ghrapic\CadastrarMatriculaView.java
 C:\a\Academia\src\main\java\com\estruturadados\academia\database\dao\PlanoDAO.java
+C:\a\Academia\src\main\java\com\estruturadados\academia\ghrapic\ListagemMatriculasView.java
 C:\a\Academia\src\main\java\com\estruturadados\academia\ghrapic\LoginView.java
+C:\a\Academia\src\main\java\com\estruturadados\academia\controller\CadastrarMatriculaViewController.java
 C:\a\Academia\src\main\java\com\estruturadados\academia\database\model\Matricula.java
 C:\a\Academia\src\main\java\com\estruturadados\academia\database\dao\MatriculaModalidadeDAO.java
 C:\a\Academia\src\main\java\com\estruturadados\academia\ghrapic\ListagemAlunosView.java
