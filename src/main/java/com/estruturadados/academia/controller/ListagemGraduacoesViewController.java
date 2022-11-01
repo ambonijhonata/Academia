@@ -42,11 +42,11 @@ public class ListagemGraduacoesViewController {
         }
     }
     
-    public boolean deletarGraduacao(String modalidade){
+    public boolean deletarGraduacao(Graduacao graduacao){
         try {
             GraduacaoDAO graduacaoDAO = new GraduacaoDAO(connection);
             
-            return graduacaoDAO.Delete(modalidade) > 0;            
+            return graduacaoDAO.Delete(graduacao) > 0;            
         } catch (SQLException ex) {
             Logger.getLogger(ListagemGraduacoesViewController.class.getName()).log(Level.SEVERE, null, ex);
         }

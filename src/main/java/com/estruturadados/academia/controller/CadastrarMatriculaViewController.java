@@ -55,4 +55,17 @@ public class CadastrarMatriculaViewController {
 
         return qtdRowsAfected > 0;
     }
+
+    public boolean atualizarMatricula(Matricula matriculaAntiga, Matricula matriculaNova) {
+        long qtdRowsAffected = 0;
+
+        try {
+            MatriculaDAO matriculaDAO = new MatriculaDAO(connection);
+            qtdRowsAffected = matriculaDAO.Update(matriculaAntiga, matriculaNova);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return qtdRowsAffected > 0;
+    }    
 }

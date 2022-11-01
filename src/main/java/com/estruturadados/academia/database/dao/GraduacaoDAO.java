@@ -18,7 +18,7 @@ public class GraduacaoDAO extends SistemaDAO {
     private String selectWithCondition = "SELECT * FROM public.graduacoes WHERE modalidade = ?";
     private String insert = "INSERT INTO public.graduacoes (modalidade, graduacao) VALUES ( ?, ?)";
     private String update = "UPDATE public.graduacoes SET modalidade = ?, graduacao = ? WHERE modalidade = ? AND graduacao = ?";
-    private String delete = "DELETE FROM public.graduacoes WHERE modalidade = ?";
+    private String delete = "DELETE FROM public.graduacoes WHERE modalidade = ? AND graduacao = ?";
 
     private PreparedStatement pstSelect;
     private PreparedStatement pstSelectWithCondition;
@@ -38,8 +38,11 @@ public class GraduacaoDAO extends SistemaDAO {
     @Override
     public long Delete(Object param) {
 
+        Graduacao graduacao = (Graduacao) param;
+
         try {
-            pstDelete.setString(1, param.toString());
+            pstDelete.setString(1, graduacao.getModalidade().getModalidade());
+            pstDelete.setString(2, graduacao.getGraduacao());
             pstDelete.execute();
 
             return pstDelete.getUpdateCount();

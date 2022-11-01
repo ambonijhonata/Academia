@@ -5,7 +5,13 @@
 package com.estruturadados.academia.ghrapic;
 
 import com.estruturadados.academia.controller.ListagemMatriculasViewController;
+import com.estruturadados.academia.database.model.Aluno;
+import com.estruturadados.academia.database.model.Matricula;
 import java.sql.Connection;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,7 +26,7 @@ public class ListagemMatriculasView extends javax.swing.JInternalFrame {
      */
     private Connection connection;
     private ListagemMatriculasViewController controller;
-    
+
     public ListagemMatriculasView(Connection connection) {
         initComponents();
         this.connection = connection;
@@ -71,11 +77,11 @@ public class ListagemMatriculasView extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Código", "Aluno", "Data matrícula", "Dia Vencimento", "Data encerramento"
+                "Matrícula", "Código", "Aluno", "Data matrícula", "Dia Vencimento", "Data encerramento"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -84,19 +90,26 @@ public class ListagemMatriculasView extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTabledDadosMatriculas);
         if (jTabledDadosMatriculas.getColumnModel().getColumnCount() > 0) {
-            jTabledDadosMatriculas.getColumnModel().getColumn(0).setMinWidth(50);
-            jTabledDadosMatriculas.getColumnModel().getColumn(0).setMaxWidth(60);
-            jTabledDadosMatriculas.getColumnModel().getColumn(1).setMinWidth(200);
-            jTabledDadosMatriculas.getColumnModel().getColumn(1).setMaxWidth(210);
-            jTabledDadosMatriculas.getColumnModel().getColumn(2).setMinWidth(100);
-            jTabledDadosMatriculas.getColumnModel().getColumn(2).setMaxWidth(120);
-            jTabledDadosMatriculas.getColumnModel().getColumn(3).setMinWidth(80);
-            jTabledDadosMatriculas.getColumnModel().getColumn(3).setMaxWidth(90);
-            jTabledDadosMatriculas.getColumnModel().getColumn(4).setMinWidth(115);
-            jTabledDadosMatriculas.getColumnModel().getColumn(4).setMaxWidth(120);
+            jTabledDadosMatriculas.getColumnModel().getColumn(0).setResizable(false);
+            jTabledDadosMatriculas.getColumnModel().getColumn(0).setPreferredWidth(10);
+            jTabledDadosMatriculas.getColumnModel().getColumn(1).setResizable(false);
+            jTabledDadosMatriculas.getColumnModel().getColumn(1).setPreferredWidth(10);
+            jTabledDadosMatriculas.getColumnModel().getColumn(2).setResizable(false);
+            jTabledDadosMatriculas.getColumnModel().getColumn(2).setPreferredWidth(150);
+            jTabledDadosMatriculas.getColumnModel().getColumn(3).setResizable(false);
+            jTabledDadosMatriculas.getColumnModel().getColumn(3).setPreferredWidth(50);
+            jTabledDadosMatriculas.getColumnModel().getColumn(4).setResizable(false);
+            jTabledDadosMatriculas.getColumnModel().getColumn(4).setPreferredWidth(50);
+            jTabledDadosMatriculas.getColumnModel().getColumn(5).setResizable(false);
+            jTabledDadosMatriculas.getColumnModel().getColumn(5).setPreferredWidth(50);
         }
 
         jButtonExcluir.setText("Excluir");
+        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirActionPerformed(evt);
+            }
+        });
 
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -124,9 +137,8 @@ public class ListagemMatriculasView extends javax.swing.JInternalFrame {
         jPanelListagemMatriculasLayout.setHorizontalGroup(
             jPanelListagemMatriculasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelListagemMatriculasLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanelListagemMatriculasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 831, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelListagemMatriculasLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnListar)
@@ -165,8 +177,8 @@ public class ListagemMatriculasView extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanelListagemMatriculas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanelListagemMatriculas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -191,12 +203,48 @@ public class ListagemMatriculasView extends javax.swing.JInternalFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
-        if(jTabledDadosMatriculas.getSelectedRow() != -1){
-            
-        }else{
+        if (jTabledDadosMatriculas.getSelectedRow() != -1) {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                Aluno aluno = new Aluno();
+                aluno.setCodigoAluno(Integer.parseInt(jTabledDadosMatriculas.getValueAt(jTabledDadosMatriculas.getSelectedRow(), 1).toString()));
+                aluno.setAluno(jTabledDadosMatriculas.getValueAt(jTabledDadosMatriculas.getSelectedRow(), 2).toString());
+
+                Matricula matricula = new Matricula();
+                matricula.setCodigoMatricula(Integer.parseInt(jTabledDadosMatriculas.getValueAt(jTabledDadosMatriculas.getSelectedRow(), 0).toString()));
+                matricula.setAluno(aluno);
+                matricula.setDataMatricula(sdf.parse(jTabledDadosMatriculas.getValueAt(jTabledDadosMatriculas.getSelectedRow(), 3).toString()));
+                matricula.setDiaVencimento(Integer.parseInt(jTabledDadosMatriculas.getValueAt(jTabledDadosMatriculas.getSelectedRow(), 4).toString()));
+
+                if (jTabledDadosMatriculas.getValueAt(jTabledDadosMatriculas.getSelectedRow(), 5) != null) {
+                    matricula.setDataEncerramento(sdf.parse(jTabledDadosMatriculas.getValueAt(jTabledDadosMatriculas.getSelectedRow(), 5).toString()));
+                }
+                CadastrarMatriculaView tela = new CadastrarMatriculaView(connection, matricula);
+                this.getParent().add(tela);
+                tela.setVisible(true);
+            } catch (ParseException ex) {
+                ex.printStackTrace();
+            }
+        } else {
             JOptionPane.showMessageDialog(null, "Por favor selecione uma matrícula.", "Atenção", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
+        // TODO add your handling code here:
+        if (jTabledDadosMatriculas.getSelectedRow() != -1) {
+            int codigoMatricula = Integer.parseInt(jTabledDadosMatriculas.getValueAt(jTabledDadosMatriculas.getSelectedRow(), 0).toString());
+
+            if (controller.deletarMatriuclar(codigoMatricula)) {
+                JOptionPane.showMessageDialog(null, "Matrícula excluída com sucesso.", "Atenção", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro ao excluir matrícula.", "Atenção", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor selecione uma matrícula.", "Atenção", JOptionPane.WARNING_MESSAGE);
+        }
+        controller.listarMatriculas((DefaultTableModel) jTabledDadosMatriculas.getModel());
+    }//GEN-LAST:event_jButtonExcluirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

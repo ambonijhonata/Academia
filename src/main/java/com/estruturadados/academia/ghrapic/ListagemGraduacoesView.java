@@ -206,8 +206,10 @@ public class ListagemGraduacoesView extends javax.swing.JInternalFrame {
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
         if (jTableDados.getSelectedRow() != -1) {
-            String modalidade = jTableDados.getValueAt(jTableDados.getSelectedRow(), 0).toString();
-            if (controller.deletarGraduacao(modalidade)) {
+            Graduacao graduacao = new Graduacao();            
+            graduacao.setModalidade(new Modalidade(jTableDados.getValueAt(jTableDados.getSelectedRow(), 0).toString()));
+            graduacao.setGraduacao(jTableDados.getValueAt(jTableDados.getSelectedRow(), 1).toString());
+            if (controller.deletarGraduacao(graduacao)) {
                 JOptionPane.showMessageDialog(null, "Graduação excluída com sucesso.", "Atenção", JOptionPane.INFORMATION_MESSAGE);
                 controller.listarGraduacoes((DefaultTableModel) jTableDados.getModel());
             } else {

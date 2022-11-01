@@ -34,7 +34,7 @@ public class ListagemMatriculasViewController {
                 modeloTabela.setRowCount(0);
 
                 for (Matricula m : listaMatriculas) {
-                    Object[] dados = {m.getCodigoMatricula(), m.getAluno().getAluno(), sdf.format(m.getDataMatricula()),
+                    Object[] dados = {m.getCodigoMatricula(), m.getAluno().getCodigoAluno(), m.getAluno().getAluno(), sdf.format(m.getDataMatricula()),
                         m.getDiaVencimento(), m.getDataEncerramento()};
                     modeloTabela.addRow(dados);
                 }
@@ -43,5 +43,18 @@ public class ListagemMatriculasViewController {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public boolean deletarMatriuclar(int codigoMatricula) {
+        long qtdRowsAffected = 0;
+
+        try {
+            MatriculaDAO matriculaDAO = new MatriculaDAO(connection);
+            qtdRowsAffected = matriculaDAO.Delete(codigoMatricula);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return qtdRowsAffected > 0;
     }
 }

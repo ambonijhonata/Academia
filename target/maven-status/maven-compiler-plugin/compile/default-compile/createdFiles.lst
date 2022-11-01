@@ -75,6 +75,7 @@ com\estruturadados\academia\ghrapic\CadastrarGraduacaoView$1.class
 com\estruturadados\academia\controller\ListagemModalidadesViewController.class
 com\estruturadados\academia\ghrapic\LoginView$3.class
 com\estruturadados\academia\controller\CadastrarPlanoViewController.class
+com\estruturadados\academia\ghrapic\ListagemMatriculasView$6.class
 com\estruturadados\academia\database\dao\MatriculaDAO.class
 com\estruturadados\academia\ghrapic\CadastrarUsuarioView.class
 com\estruturadados\academia\ghrapic\ListagemAlunosView$5.class
